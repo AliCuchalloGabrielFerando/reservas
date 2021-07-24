@@ -18,10 +18,11 @@
 
             <div class="w-full p-6">
                 <p class="text-gray-700">
-                    You are logged in!
+                    Está en el Sistema de Reservas!
                 </p>
             </div>
         </section>
+
     </div>
 </main>
 @endsection
