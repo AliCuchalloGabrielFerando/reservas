@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class externo_lab extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'cod';
     protected $table = 'externo_lab';
 
     protected $fillable = [
-        'correo', 'cod', 'persona_ci',
+        'cod','correo',  'persona_ci',
     ];
 
     protected $hidden = [

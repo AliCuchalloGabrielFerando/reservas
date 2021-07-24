@@ -10,7 +10,7 @@ class docente extends Model
     use HasFactory;
 
     protected $table = 'docente';
-
+    protected $primaryKey = 'cod';
     protected $fillable = [
         'cod', 'persona_ci',
     ];

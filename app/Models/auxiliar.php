@@ -10,10 +10,10 @@ class auxiliar extends Model
     use HasFactory;
 
     protected $table = 'auxiliar';
-
+    protected $primaryKey = 'cod';
     protected $fillable = [
-        'cv', 'alta_baja', 'ciudad', 'codigo_aux', 'correo', 'fecha_nacimiento',
-        'fechaR', 'cod', 'numero_formulario', 'registro', 'telefono', 'usuario', 'persona_ci',
+        'cod','cv', 'alta_baja', 'ciudad', 'codigo_aux', 'correo', 'fecha_nacimiento',
+        'fechaR', 'numero_formulario', 'registro', 'telefono', 'usuario', 'persona_ci',
         'tipo_auxiliar_id',
     ];
 
