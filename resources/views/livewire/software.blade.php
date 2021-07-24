@@ -1,0 +1,3 @@
+<div>
+    {{$software}}
+</div>
