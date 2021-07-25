@@ -18,7 +18,7 @@
                         </label>
 
                         <input id="email" type="email"
-                            class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300" @error('email') border-red-500 @enderror" name="email"
+                            class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 @error('email') border-red-500 @enderror" name="email"
                             value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
@@ -34,7 +34,7 @@
                         </label>
 
                         <input id="password" type="password"
-                            class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300" @error('password') border-red-500 @enderror" name="password"
+                            class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 @error('password') border-red-500 @enderror" name="password"
                             required>
 
                         @error('password')
