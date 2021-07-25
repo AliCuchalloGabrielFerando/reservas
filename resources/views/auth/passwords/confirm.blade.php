@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
     <div class="flex">
         <div class="w-full">
@@ -52,4 +50,4 @@
         </div>
     </div>
 </main>
-@endsection
+    </x-app-layout>
