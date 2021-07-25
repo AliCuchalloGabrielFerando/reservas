@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\usuario;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,7 +27,7 @@ class GestionarUsuarioC extends Component
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
-        ['usuarios'=>usuario::where('nombre','like',"%{$this->search}%")
+        ['usuarios'=>User::where('name','like',"%{$this->search}%")
             ->orwhere('usuario','like',"%{$this->search}%")
             ->paginate($this->nrosPagina)]);
     }
@@ -45,8 +45,8 @@ class GestionarUsuarioC extends Component
 
     public function cambioPag($id){
         $this->otraPagina = $id;
-        $usuarioC = usuario::find($this->otraPagina);
-        $this->nuevoNombre = $usuarioC->nombre;
+        $usuarioC = User::find($this->otraPagina);
+        $this->nuevoNombre = $usuarioC->name;
         $this->nuevoUsuario = $usuarioC->usuario;
         $this->nuevoPass = $usuarioC->contraseña;
     }
@@ -56,8 +56,8 @@ class GestionarUsuarioC extends Component
     }
 
     public function volver(){
-        $usuarioEditado = usuario::find($this->otraPagina);
-        $usuarioEditado->nombre = $this->nuevoNombre;
+        $usuarioEditado = User::find($this->otraPagina);
+        $usuarioEditado->name = $this->nuevoNombre;
         $usuarioEditado->usuario = $this->nuevoUsuario;
         $usuarioEditado->contraseña = $this->nuevoPass;
         $usuarioEditado-> save();
@@ -69,8 +69,8 @@ class GestionarUsuarioC extends Component
     }
 
     public function guardarCrear(){
-        $usuarioGuardar = new usuario();
-        $usuarioGuardar->nombre = $this->nuevoNombre;
+        $usuarioGuardar = new User();
+        $usuarioGuardar->name = $this->nuevoNombre;
         $usuarioGuardar->contraseña = $this->nuevoPass;
         $usuarioGuardar->usuario = $this->nuevoPass;
         $usuarioGuardar->alta_baja = $this->alta_baja;

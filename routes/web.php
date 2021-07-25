@@ -29,6 +29,7 @@ Route::get('/', function () {
 //Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class);
 
 Route::get('/login',function(){
     return view('auth.login');
@@ -38,7 +39,7 @@ Route::get('profile', function () {
   // Only authenticated users may enter...
   return "Hola";
 })->middleware('auth','role:all');
-   
+
 Route::post('/login',[LoginController::class,'login'])->name('login');;
 
 Route::get('/cargacion',function(){
@@ -49,7 +50,7 @@ Route::get('/cargacion',function(){
     "usuario"=>"ali",
     "fechaR"=>"2021-07-22"
   ]);
- 
+
   $grupo = grupo::create([
     "alta_baja"=>"dfs",
     "descripcion"=>"descripcion chafa",
@@ -68,19 +69,19 @@ Route::get('/cargacion',function(){
     "ci"=>"8874491",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
-    "nombre"=>"ali" 
+    "nombre"=>"ali"
   ]);
   $persona2 = persona::create([
     "ci"=>"8875691",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
-    "nombre"=>"miranda" 
+    "nombre"=>"miranda"
   ]);
   $persona3 = persona::create([
     "ci"=>"8875591",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
-    "nombre"=>"rafael" 
+    "nombre"=>"rafael"
   ]);
   $docente = docente::create([
       "cod"=>"1",
@@ -125,7 +126,7 @@ Route::get('/cargacion',function(){
     "fechaR"=>"2001-07-22",
     "grupo_id"=>"1",
     "docente_cod"=>"1"
-    
+
   ]);
   $usuario2 = User::create([
     'name'=>"miranda",
@@ -135,9 +136,9 @@ Route::get('/cargacion',function(){
     "usuario"=>"megamiranda",
     "fechaR"=>"2001-07-22",
     "grupo_id"=>"2",
-   
+
     "jefe_lab_cod"=>"2",
-  
+
   ]);
   $usuario3 = User::create([
     'name'=>"rafael",
@@ -147,11 +148,11 @@ Route::get('/cargacion',function(){
     "usuario"=>"megali",
     "fechaR"=>"2001-07-22",
     "grupo_id"=>"3",
-   
+
     "auxiliar_cod"=>"3"
   ]);
   return "hola";
-  
+
 });
 Route::get('/prueba',function(){
     return "hola munod";

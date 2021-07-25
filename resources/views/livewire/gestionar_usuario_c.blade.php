@@ -3,10 +3,10 @@
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-1">
             <div class="py-2 align-middle inline-block min-w-full sm:px-4 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-800 sm:rounded-lg">
-                    <div class="flex">
+                <div class="shadow overflow-hidden border-b border-gray-800 sm:rounded-lg p-2">
+                    <div class="flex space-x-5 mb-3">
                     <input wire:model="search"
-                           class="form-input rounded-md shadow-sm mt-1 block w-full"
+                           class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
                            type="text"
                            placeholder="Buscar..."
                         >
@@ -50,7 +50,7 @@
                                 <div class="flex items-center">
                                     <div class="ml-4">
                                         <div class="text-sm text-gray-500">
-                                            {{$usuario->nombre}}
+                                            {{$usuario->name}}
                                         </div>
                                     </div>
                                 </div>
@@ -112,32 +112,32 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                    <input wire:model="crearNombre" type="text" name="first-name" id="first-name" autocomplete="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <label for="first-name" class="block text-sm font-medium text-red-700">Nombre</label>
+                                    <input wire:model="crearNombre" type="text" name="first-name" id="first-name" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Usuario</label>
-                                    <input wire:model="crearUsuario" type="text" name="usuario" id="usuario" autocomplete="user" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="crearUsuario" type="text" name="usuario" id="usuario" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                                    <input wire:model="crearPass" type="text" name="password" id="password" autocomplete="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="crearPass" type="text" name="password" id="password" autocomplete="password" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Fecha Registro</label>
-                                    <input wire:model="crearfechaR" type="date" name="date" id="date" autocomplete="date" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="crearfechaR" type="date" name="date" id="date" autocomplete="date" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
-                                    <input wire:model="grupoId" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="grupoId" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                             </div>
                         </div>
@@ -169,17 +169,17 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                        <input wire:model="nuevoNombre" type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input wire:model="nuevoNombre" type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="last-name" class="block text-sm font-medium text-gray-700">Usuario</label>
-                                        <input wire:model="nuevoUsuario" type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input wire:model="nuevoUsuario" type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-4">
                                         <label for="email-address" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                                        <input wire:model="nuevoPass" type="password" name="email-address" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input wire:model="nuevoPass" type="password" name="email-address" id="email-address" autocomplete="email" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                     </div>
                                 </div>
                             </div>
@@ -197,3 +197,5 @@
         </div>
     @endif
 </div>
+
+
