@@ -9,19 +9,19 @@ class requisitos_software extends Model
 {
     use HasFactory;
 
-    protected $table = 'reserva_lugar';
+    protected $table = 'reserva_aula';
 
     protected $fillable = [
-        'fecha_actualizacion', 'software_version_id', 'lugar_id',
+        'fecha_actualizacion', 'software_version_id', 'aula_id',
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
     ];
 
-    public function lugar(){
-        return $this->belongsTo(lugar::class,
-            'lugar_id', 'id');
+    public function aula(){
+        return $this->belongsTo(aula::class,
+            'aula_id', 'id');
     }
 
     public function software_version(){

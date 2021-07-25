@@ -16,9 +16,9 @@ class CreateRequisitosSoftwareTable extends Migration
         Schema::create('requisitos_software', function (Blueprint $table) {
             $table->id();
             $table->date("fecha_actualizacion");
-            $table->unsignedBigInteger("lugar_id") ->nullable();
-            $table->foreign("lugar_id")->references("id")
-                ->on("lugar")
+            $table->unsignedBigInteger("aula_id") ->nullable();
+            $table->foreign("aula_id")->references("id")
+                ->on("aula")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->unsignedBigInteger("software_version_id");

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMateriaParaleloTable extends Migration
+class CreateMateriaGrupomTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateMateriaParaleloTable extends Migration
      */
     public function up()
     {
-        Schema::create('materia_paralelo', function (Blueprint $table) {
+        Schema::create('materia_grupom', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("materia_id");
             $table->foreign("materia_id")->references("id")->on("materia")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->unsignedBigInteger("paralelo_id");
-            $table->foreign("paralelo_id")->references("id")->on("paralelo")
+            $table->unsignedBigInteger("grupom_id");
+            $table->foreign("grupom_id")->references("id")->on("grupom")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
@@ -34,6 +34,6 @@ class CreateMateriaParaleloTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materia_paralelo');
+        Schema::dropIfExists('materia_grupom');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoLugarTable extends Migration
+class CreateGrupomTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTipoLugarTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_lugar', function (Blueprint $table) {
+        Schema::create('grupom', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre",100);
+            $table->string("nombre",50);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateTipoLugarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_lugar');
+        Schema::dropIfExists('grupom');
     }
 }
