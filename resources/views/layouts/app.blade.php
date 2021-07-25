@@ -42,6 +42,10 @@
                 </nav>
             </div>
         </header>
+        @yield('header')
+        @yield('content')
+
+        {{$header}}
         {{ $slot }}
     </div>
     @livewireScripts
