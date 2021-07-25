@@ -79,6 +79,40 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div x-data="{ open: false }">
+                                    <button
+                                        @click="open = true"
+                                        class="hover:text-indigo-900 text-red-800">
+                                        Eliminar
+                                    </button>
+                                    <div
+                                        x-show="open"
+                                        class="fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+                                        <div class="absolute top-0 left-0 w-full h-screen bg-black opacity-60"
+                                             x-show="open"
+                                             @click="open = false">
+
+                                        </div>
+                                        <div
+                                            x-show="open"
+                                            class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
+                                            <div class="p-6 border-b">
+                                                <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
+                                            </div>
+                                            <div class="p-6">
+                                                <button wire:click="eliminarPag({{$usuario->id}})">
+                                                        Si
+                                                </button>
+                                                <button @click="open = false">
+                                                        No
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a wire:click="cambioPag({{$usuario->id}})"href="#" class="text-indigo-600 hover:text-indigo-900">Editar</a>
                             </td>
                         </tr>
@@ -112,32 +146,44 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium text-red-700">Nombre</label>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
                                     <input wire:model="crearNombre" type="text" name="first-name" id="first-name" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Usuario</label>
                                     <input wire:model="crearUsuario" type="text" name="usuario" id="usuario" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Correo</label>
+                                    <input wire:model="crearEmail" type="email" name="email" id="email" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                                    <input wire:model="crearPass" type="text" name="password" id="password" autocomplete="password" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearPass" type="password" name="password" id="password" autocomplete="password" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Fecha Registro</label>
-                                    <input wire:model="crearfechaR" type="date" name="date" id="date" autocomplete="date" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearFechaR" type="date" name="date" id="date" autocomplete="date" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
                                     <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Id de Grupo</label>
                                     <input wire:model="grupoId" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de Docente</label>
+                                    <input wire:model="docenteCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                </div>
+                                <div class="col-span-6 sm:col-span-4">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de JefeLab</label>
+                                    <input wire:model="jefeLabCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                </div>
+                                <div class="col-span-6 sm:col-span-4">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de Auxiliar</label>
+                                    <input wire:model="auxiliarCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +208,7 @@
 
         <div class="mt-10 sm:mt-0">
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form wire:submit.prevent="volver">
+                    <form wire:submit.prevent="editar">
                         @csrf
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
@@ -197,5 +243,7 @@
         </div>
     @endif
 </div>
+
+
 
 

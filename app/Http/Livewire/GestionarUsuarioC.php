@@ -3,8 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+
 
 class GestionarUsuarioC extends Component
 {
@@ -22,8 +24,13 @@ class GestionarUsuarioC extends Component
     public $crearNombre;
     public $crearUsuario;
     public $crearPass;
-    public $crearfechaR;
+    public $crearFechaR;
     public $alta_baja;
+    public $docenteCod;
+    public $jefeLabCod;
+    public $auxiliarCod;
+    public $grupoId;
+    public $crearEmail;
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
@@ -48,19 +55,24 @@ class GestionarUsuarioC extends Component
         $usuarioC = User::find($this->otraPagina);
         $this->nuevoNombre = $usuarioC->name;
         $this->nuevoUsuario = $usuarioC->usuario;
-        $this->nuevoPass = $usuarioC->contraseña;
+        $this->nuevoPass = $usuarioC->password;
+    }
+
+    public function eliminarPag($id){
+        $usuarioEliminado = User::find($id);
+        $usuarioEliminado-> delete();
     }
 
     public function cancelar(){
         $this->otraPagina = "actual";
     }
 
-    public function volver(){
+    public function editar(){
         $usuarioEditado = User::find($this->otraPagina);
         $usuarioEditado->name = $this->nuevoNombre;
         $usuarioEditado->usuario = $this->nuevoUsuario;
-        $usuarioEditado->contraseña = $this->nuevoPass;
-        $usuarioEditado-> save();
+        $usuarioEditado->password = Hash::make($this->nuevoPass);
+        $usuarioEditado->save();
         $this->otraPagina = "actual";
     }
 
@@ -70,11 +82,22 @@ class GestionarUsuarioC extends Component
 
     public function guardarCrear(){
         $usuarioGuardar = new User();
-        $usuarioGuardar->name = $this->nuevoNombre;
-        $usuarioGuardar->contraseña = $this->nuevoPass;
-        $usuarioGuardar->usuario = $this->nuevoPass;
+        $usuarioGuardar->name = $this->crearNombre;
+        $usuarioGuardar->password = Hash::make($this->crearPass);
+        $usuarioGuardar->usuario = $this->crearUsuario;
         $usuarioGuardar->alta_baja = $this->alta_baja;
-        $usuarioGuardar->fechaR = $this->crearfechaR;
+        $usuarioGuardar->fechaR = $this->crearFechaR;
+        $usuarioGuardar->grupo_id = $this->grupoId;
+        if ($this->docenteCod != '') {
+            $usuarioGuardar->docente_cod = $this->docenteCod;
+        }
+        if ($this->docenteCod != '') {
+            $usuarioGuardar->jefe_lab_cod = $this->jefeLabCod;
+        }
+        if ($this->docenteCod != '') {
+            $usuarioGuardar->auxiliar_cod = $this->auxiliarCod;
+        }
+        $usuarioGuardar->email = $this->crearEmail;
         $usuarioGuardar-> save();
         $this->otraPagina = "actual";
 

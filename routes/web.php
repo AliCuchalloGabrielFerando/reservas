@@ -29,12 +29,16 @@ Route::get('/', function () {
 //Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class);
+
+Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
+    ->name('gestionar_usuario_c')->middleware('auth');
 
 Route::get('/login',function(){
     return view('auth.login');
 })->name('/');
+
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+
 Route::get('profile', function () {
   // Only authenticated users may enter...
   return "Hola";
@@ -155,5 +159,5 @@ Route::get('/cargacion',function(){
 
 });
 Route::get('/prueba',function(){
-    return "hola munod";
+    return "hola mundo";
 });

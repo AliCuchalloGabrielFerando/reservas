@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -21,6 +22,16 @@
                     <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    @auth
+                    <a href="{{ route('gestionar_usuario_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                        Gestionar Usuario
+                    </a>
+                    @endauth
+                    @auth
+                        <a href="{{ route('gestionar_usuario_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                            Gestionar Módulo
+                        </a>
+                    @endauth
                 </div>
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     @guest
@@ -32,17 +43,14 @@
                         <span>{{ Auth::user()->name }}</span>
 
                         <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline"
-                           onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            {{ csrf_field() }}
-                        </form>
+                           class="no-underline hover:underline">
+                           {{ __('Logout') }}
+                        </a>
                     @endguest
                 </nav>
             </div>
         </header>
-        {{ $slot }}
+        {{$slot}}
     </div>
     @livewireScripts
 </body>

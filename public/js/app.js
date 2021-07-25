@@ -1842,6 +1842,8 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './alpinejs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
