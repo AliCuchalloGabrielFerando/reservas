@@ -33,6 +33,12 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
     ->name('gestionar_usuario_c')->middleware('auth');
 
+Route::get('/gestionar_modulo_c',\App\Http\Livewire\GestionarModuloC::class)
+    ->name('gestionar_modulo_c')->middleware('auth');
+
+Route::get('/gestionar_aula_c',\App\Http\Livewire\GestionarAulaC::class)
+    ->name('gestionar_aula_c')->middleware('auth');
+
 Route::get('/login',function(){
     return view('auth.login');
 })->name('/');

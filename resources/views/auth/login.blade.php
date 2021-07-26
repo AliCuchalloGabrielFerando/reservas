@@ -79,6 +79,9 @@
             </section>
         </div>
     </div>
+        <p class="text-center text-gray-500 text-xs">
+            &copy;2021 Tecnología Web - Grupo11 - SA.
+        </p>
 </main>
 
 </x-app-layout>

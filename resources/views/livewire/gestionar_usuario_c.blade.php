@@ -1,4 +1,5 @@
 <div>
+    {{$eliminar?"Es ver":"Es fal"}}
    @if($otraPagina == "actual")
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-1">
@@ -79,41 +80,13 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <div x-data="{ open: false }">
-                                    <button
-                                        @click="open = true"
-                                        class="hover:text-indigo-900 text-red-800">
+                                <button wire:click="idActual({{$usuario->id}})"
+                                        class="text-red-900">
                                         Eliminar
-                                    </button>
-                                    <div
-                                        x-show="open"
-                                        class="fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-                                        <div class="absolute top-0 left-0 w-full h-screen bg-black opacity-60"
-                                             x-show="open"
-                                             @click="open = false">
-
-                                        </div>
-                                        <div
-                                            x-show="open"
-                                            class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
-                                            <div class="p-6 border-b">
-                                                <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
-                                            </div>
-                                            <div class="p-6">
-                                                <button wire:click="eliminarPag({{$usuario->id}})">
-                                                        Si
-                                                </button>
-                                                <button @click="open = false">
-                                                        No
-                                                </button>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </button>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a wire:click="cambioPag({{$usuario->id}})"href="#" class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                <a wire:click="irEditar({{$usuario->id}})" href="#" class="text-indigo-600 hover:text-indigo-900">Editar</a>
                             </td>
                         </tr>
                         @endforeach
@@ -122,11 +95,11 @@
                         <div class="bg-white px-4 py-6 border-t border-gray-200 sm:px-6">
                             {{ $usuarios->links() }}
                         </div>
-                         <div class="content-start content-end">
+                        <div class="content-start content-end">
                         <button wire:click="crear" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Crear Usuario
                         </button>
-                         </div>
+                        </div>
                     @else
                         <div class="bg-white px-4 py-6 border-t border-gray-200 sm:px-6">
                             No hay resultados para la busqueda "{{$search}}" en la pagina {{ $page }} al
@@ -242,6 +215,33 @@
                 </div>
         </div>
     @endif
+    <div x-show="$eliminar"
+         class="bg-black opacity-60 fixed top-0 left-0 w-full flex justify-center items-center">
+        {{$eliminar}}
+    </div>
+
+          <!--<div
+               x-show="{{$eliminar}}"
+               class="fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+               <div class="absolute top-0 left-0 w-full h-screen bg-black opacity-60"
+                    x-show="{{$eliminar}}">
+               </div>
+               <div
+                   x-show="{{$eliminar}}"
+                   class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
+                   <div class="p-6 border-b">
+                       <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
+                   </div>
+                   <div class="p-6">
+                       <button  wire:click="eliminarPag">
+                           Si
+                       </button>
+                       <button wire:click="$toggle('eliminar')">
+                           No
+                       </button>
+                   </div>
+               </div>
+           </div>
 </div>
 
 
