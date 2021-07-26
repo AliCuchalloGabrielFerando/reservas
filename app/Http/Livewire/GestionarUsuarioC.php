@@ -32,7 +32,6 @@ class GestionarUsuarioC extends Component
     public $grupoId;
     public $crearEmail;
     public $idActual;
-    public $eliminar = false;
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
@@ -46,10 +45,9 @@ class GestionarUsuarioC extends Component
         $this->resetPage();
     }
 
-    public function idActual($elId){
+    /*public function idActual($elId){
         $this->idActual = $elId;
-        $this->eliminar = true;
-    }
+    }*/
 
     public  function clear(){
         $this->search= "";

@@ -1,4 +1,4 @@
-<div>
+<div  x-data="{open: false}">
     <div class=" flex justify-center">
         <h1 class="text-center text-3xl mt-10 text-base-900 border-1 border-blue-100">Gestión de Módulos</h1>
     </div>
@@ -99,4 +99,22 @@
         </div>
     </div>
     @endif
+    <div x-show="open"
+         class="absolute z-20 top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-60">
+        <div
+            class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
+            <div class="p-6 border-b">
+                <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
+            </div>
+            <div class="p-6">
+                <button class="border-2 border-blue-500" @click="open = false"
+                        wire:click="eliminarPag()">
+                    Si
+                </button>
+                <button class="border-2 border-blue-500" @click="open = false">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

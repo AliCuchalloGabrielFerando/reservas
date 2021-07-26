@@ -1,5 +1,4 @@
-<div>
-    {{$eliminar?"Es ver":"Es fal"}}
+<div x-data="{open: false}">
    @if($otraPagina == "actual")
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-1">
@@ -80,7 +79,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button wire:click="idActual({{$usuario->id}})"
+                                <button @click="open = !open" wire:click="$set('idActual',{{$usuario->id}})"
                                         class="text-red-900">
                                         Eliminar
                                 </button>
@@ -215,33 +214,24 @@
                 </div>
         </div>
     @endif
-    <div x-show="$eliminar"
-         class="bg-black opacity-60 fixed top-0 left-0 w-full flex justify-center items-center">
-        {{$eliminar}}
+    <div x-show="open"
+         class="absolute z-20 top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-60">
+        <div
+            class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
+            <div class="p-6 border-b">
+                <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
+            </div>
+            <div class="p-6">
+                <button class="border-2 border-blue-500" @click="open = false"
+                        wire:click="eliminarPag()">
+                    Si
+                </button>
+                <button class="border-2 border-blue-500" @click="open = false">
+                    No
+                </button>
+            </div>
+        </div>
     </div>
-
-          <!--<div
-               x-show="{{$eliminar}}"
-               class="fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-               <div class="absolute top-0 left-0 w-full h-screen bg-black opacity-60"
-                    x-show="{{$eliminar}}">
-               </div>
-               <div
-                   x-show="{{$eliminar}}"
-                   class="flex flex-col rounded-lg shadow-lg overflow-hidden bg-white w-3/5 h-3/5 z-10">
-                   <div class="p-6 border-b">
-                       <h2 id="modal1_label">¿Estás Seguro de Eliminar?</h2>
-                   </div>
-                   <div class="p-6">
-                       <button  wire:click="eliminarPag">
-                           Si
-                       </button>
-                       <button wire:click="$toggle('eliminar')">
-                           No
-                       </button>
-                   </div>
-               </div>
-           </div>
 </div>
 
 

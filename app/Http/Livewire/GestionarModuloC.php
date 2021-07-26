@@ -14,11 +14,16 @@ class GestionarModuloC extends Component
     public $otraPagina="actual";
     public $numero;
     public $facultadId;
+    public $elId;
     public function render()
     {
         return view('livewire.gestionar_modulo_c',
             ['modulos'=>modulo::where('nro','like',"%{$this->buscar}%")
                 ->paginate($this->nrosPagina)]);
+    }
+
+    public function idActual($elId){
+        $this->idActual = $elId;
     }
 
     public function irAulas(){
