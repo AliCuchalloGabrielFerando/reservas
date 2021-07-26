@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class materia_paralelo extends Model
+class materia_grupom extends Model
 {
     use HasFactory;
 
-    protected $table = 'materia_paralelo';
+    protected $table = 'materia_grupom';
 
     protected $fillable = [
-        'nombre', 'materia_id', 'paralelo_id',
+      'materia_id', 'grupom_id',
     ];
 
     protected $hidden = [
@@ -24,9 +24,9 @@ class materia_paralelo extends Model
             'materia_id', 'id');
     }
 
-    public function paralelo(){
-        return $this->belongsTo(paralelo::class,
-            'paralelo_id', 'id');
+    public function grupom(){
+        return $this->belongsTo(grupom::class,
+            'grupom_id', 'id');
     }
 
     public function reserva(){

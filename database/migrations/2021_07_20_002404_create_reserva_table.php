@@ -30,7 +30,7 @@ class CreateReservaTable extends Migration
                 ->cascadeOnUpdate();
             $table->unsignedBigInteger("materia_paralelo_id");
             $table->foreign("materia_paralelo_id")->references("id")
-                ->on("materia_paralelo")
+                ->on("materia_grupom")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->unsignedBigInteger("persona_ci") ->nullable();

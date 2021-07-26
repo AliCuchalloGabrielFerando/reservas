@@ -12,7 +12,7 @@ class carrera extends Model
     protected $table = 'carrera';
 
     protected $fillable = [
-        'abreviatura', 'codigo', 'nombre', 'universidad_id',
+        'sigla', 'nombre', 'facultad_id',
     ];
 
     protected $hidden = [

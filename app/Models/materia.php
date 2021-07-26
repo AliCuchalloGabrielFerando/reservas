@@ -24,8 +24,8 @@ class materia extends Model
             'carrera_id', 'id');
     }
 
-    public function materia_paralelo(){
-        return $this->hasMany(materia_paralelo::class,
+    public function materia_grupom(){
+        return $this->hasMany(materia_grupom::class,
             'materia_id', 'id');
     }
 }

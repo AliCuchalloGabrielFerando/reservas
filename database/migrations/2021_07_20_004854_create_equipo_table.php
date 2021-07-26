@@ -24,9 +24,9 @@ class CreateEquipoTable extends Migration
             $table->string("estado",10);
             $table->string("usuario",150);
             $table->string("prestable",2);
-            $table->unsignedBigInteger("lugar_id");
-            $table->foreign("lugar_id")->references("id")
-                ->on("lugar")
+            $table->unsignedBigInteger("aula_id");
+            $table->foreign("aula_id")->references("id")
+                ->on("aula")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->unsignedBigInteger("tipo_id");

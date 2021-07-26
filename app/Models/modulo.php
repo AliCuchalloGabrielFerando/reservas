@@ -24,8 +24,8 @@ class modulo extends Model
             'facultad_id', 'id');
     }
 
-    public function lugar(){
-        return $this->hasMany(lugar::class,
+    public function aula(){
+        return $this->hasMany(aula::class,
             'modulo_id', 'id');
     }
 }

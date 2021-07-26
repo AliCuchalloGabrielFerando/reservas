@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reserva_lugar extends Model
+class reserva_aula extends Model
 {
     use HasFactory;
 
-    protected $table = 'reserva_lugar';
+    protected $table = 'reserva_aula';
 
     protected $fillable = [
-        'dia', 'fecha', 'hora_inicio', 'hora_fin', 'reserva_id', 'lugar_id',
+        'dia', 'fecha', 'hora_inicio', 'hora_fin', 'reserva_id', 'aula_id',
     ];
 
     protected $hidden = [
@@ -24,8 +24,8 @@ class reserva_lugar extends Model
             'reserva_id', 'id');
     }
 
-    public function lugar(){
-        return $this->belongsTo(lugar::class,
-            'lugar_id', 'id');
+    public function aula(){
+        return $this->belongsTo(aula::class,
+            'aula_id', 'id');
     }
 }
