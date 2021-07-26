@@ -22,12 +22,24 @@ use App\Http\Middleware\AdminRole;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*DB_CONNECTION=pgsql
+DB_HOST=ec2-54-83-82-187.compute-1.amazonaws.com
+DB_PORT=5432
+DB_DATABASE=dchqfk38f1ticu
+DB_USERNAME=avxcspzvojdxoz
+DB_PASSWORD=c9e4208e6e1976e92e45bd5a711fea2ffa23c426a847fa198ef482aaf6866d18*/
+
 
 Route::get('/', function () {
     return view('welcome');
 })->name('w');
 //Auth::routes();
+Route::middleware(['auth', 'role:all'])->group(function () {
+    Route::get('/aula/{id}/calendario',\App\Http\Livewire\Reserva\Calendario::class );
+    Route::get('/reserva/crear', \App\Http\Livewire\Reserva\CrearReserva::class);
+    Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class );
 
+});
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
