@@ -13,7 +13,7 @@ class reserva extends Model
 
     protected $fillable = [
         'alta_baja', 'actividad', 'estado', 'fecha_inicio_reserva', 'fecha_fin_reserva',
-        'prioridad', 'semanal', 'materia_paralelo_id', 'gestion_academica_id',
+        'prioridad', 'semanal', 'materia_grupom_id', 'gestion_academica_id',
         'docente_cod', 'persona_ci',
     ];
 
@@ -21,9 +21,9 @@ class reserva extends Model
         'created_at', 'updated_at',
     ];
 
-    public function materia_paralelo(){
-        return $this->belongsTo(materia_paralelo::class,
-            'materia_paralelo_id', 'id');
+    public function materia_grupom(){
+        return $this->belongsTo(materia_grupom::class,
+            'materia_grupom_id', 'id');
     }
 
     public function gestion_academica(){
@@ -41,8 +41,8 @@ class reserva extends Model
             'persona_ci', 'ci');
     }
 
-    public function reserva_lugar(){
-        return $this->hasMany(reserva_lugar::class,
+    public function reserva_aula(){
+        return $this->hasMany(reserva_aula::class,
             'reserva_id', 'id');
     }
 }

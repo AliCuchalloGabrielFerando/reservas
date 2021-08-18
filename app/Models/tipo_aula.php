@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipo_lugar extends Model
+class tipo_aula extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipo_lugar';
+    protected $table = 'tipo_aula';
 
     protected $fillable = [
         'nombre',
@@ -20,7 +20,7 @@ class tipo_lugar extends Model
     ];
 
     public function lugar(){
-        return $this->hasMany(lugar::class,
+        return $this->hasMany(aula::class,
             'tipo_lugar_id', 'id');
     }
 

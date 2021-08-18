@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParaleloTable extends Migration
+class CreateTipoAulaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateParaleloTable extends Migration
      */
     public function up()
     {
-        Schema::create('paralelo', function (Blueprint $table) {
+        Schema::create('tipo_aula', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre",50);
+            $table->string("nombre",100);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateParaleloTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paralelo');
+        Schema::dropIfExists('tipo_aula');
     }
 }
