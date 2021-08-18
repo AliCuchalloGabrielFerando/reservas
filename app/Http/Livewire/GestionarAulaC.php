@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\lugar;
+use App\Models\aula;
 use Livewire\Component;
 
 class GestionarAulaC extends Component
