@@ -16,6 +16,7 @@ class CreateDocenteTable extends Migration
         Schema::create('docente', function (Blueprint $table) {
             $table->unsignedBigInteger("cod");
             $table->primary("cod");
+
             $table->unsignedBigInteger("persona_ci");
             $table->foreign("persona_ci")->references("ci")->on("persona")
                 ->cascadeOnDelete()

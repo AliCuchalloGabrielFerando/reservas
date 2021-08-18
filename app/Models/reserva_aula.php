@@ -12,7 +12,11 @@ class reserva_aula extends Model
     protected $table = 'reserva_aula';
 
     protected $fillable = [
-        'dia', 'fecha', 'hora_inicio', 'hora_fin', 'reserva_id', 'aula_id',
+        'dias',
+        'hora_inicio',
+        'hora_fin',
+        'reserva_id',
+        'aula_id',
     ];
 
     protected $hidden = [

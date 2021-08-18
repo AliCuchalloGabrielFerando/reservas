@@ -15,20 +15,22 @@ class CreateReservaAulaTable extends Migration
     {
         Schema::create('reserva_aula', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("dia");
-            $table->date("fecha");
+            $table->string("dias",20);
             $table->time("hora_inicio");
             $table->time("hora_fin");
+
             $table->unsignedBigInteger("reserva_id");
             $table->foreign("reserva_id")->references("id")
                 ->on("reserva")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
             $table->unsignedBigInteger("aula_id");
             $table->foreign("aula_id")->references("id")
                 ->on("aula")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }

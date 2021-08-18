@@ -12,9 +12,16 @@ class reserva extends Model
     protected $table = 'reserva';
 
     protected $fillable = [
-        'alta_baja', 'actividad', 'estado', 'fecha_inicio_reserva', 'fecha_fin_reserva',
-        'prioridad', 'semanal', 'materia_grupom_id', 'gestion_academica_id',
-        'docente_cod', 'persona_ci',
+        'actividad',
+        'fecha_inicio',
+        'fecha_fin',
+
+        'estado_id',
+        'prioridad_id',
+        'materia_grupom_id',
+        'gestion_academica_id',
+        'persona_ci',
+        'jefe_lab_cod'
     ];
 
     protected $hidden = [
@@ -31,10 +38,10 @@ class reserva extends Model
             'gestion_academica_id', 'id');
     }
 
-    public function docente(){
+/*    public function docente(){
         return $this->belongsTo(docente::class,
             'docente_cod', 'cod');
-    }
+    }*/
 
     public function persona(){
         return $this->belongsTo(persona::class,

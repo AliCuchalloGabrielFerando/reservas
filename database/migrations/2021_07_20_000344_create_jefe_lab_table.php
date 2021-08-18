@@ -16,6 +16,7 @@ class CreateJefeLabTable extends Migration
         Schema::create('jefe_lab', function (Blueprint $table) {
             $table->unsignedBigInteger("cod");
             $table->primary("cod");
+
             $table->string("correo",100);
             $table->bigInteger("telefono");
             $table->unsignedBigInteger("persona_ci");

@@ -15,30 +15,41 @@ class CreateReservaTable extends Migration
     {
         Schema::create('reserva', function (Blueprint $table) {
             $table->id();
-            $table->string("alta_baja",10);
             $table->string("actividad",500);
-            $table->string("estado",15);
-            $table->bigInteger("prioridad");
-            $table->date("fecha_inicio_reserva");
-            $table->date("fecha_fin_reserva");
-            $table->boolean("semanal");
+            $table->date("fecha_inicio");
+            $table->date("fecha_fin");
+
+            $table->unsignedBigInteger("estado_id");
+            $table->foreign("estado_id")->references("id")
+                ->on("estado")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger("prioridad_id");
+            $table->foreign("prioridad_id")->references("id")
+                ->on("prioridad")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->unsignedBigInteger("gestion_academica_id");
             $table->foreign("gestion_academica_id")->references("id")
                 ->on("gestion_academica")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
             $table->unsignedBigInteger("materia_paralelo_id");
             $table->foreign("materia_paralelo_id")->references("id")
                 ->on("materia_grupom")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->unsignedBigInteger("persona_ci") ->nullable();
+
+            $table->unsignedBigInteger("persona_ci");
             $table->foreign("persona_ci")->references("ci")->on("persona")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->unsignedBigInteger("docente_cod") ->nullable();
-            $table->foreign("docente_cod")->references("cod")->on("docente")
+
+            $table->unsignedBigInteger("jefe_lab_cod") ->nullable();
+            $table->foreign("jefe_lab_cod")->references("cod")->on("jefe_lab")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

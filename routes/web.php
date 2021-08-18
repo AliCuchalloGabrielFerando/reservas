@@ -43,13 +43,15 @@ DB_PASSWORD=c9e4208e6e1976e92e45bd5a711fea2ffa23c426a847fa198ef482aaf6866d18*/
 Route::get('/', function () {
     return view('welcome');
 })->name('w');
-//Auth::routes();
+
+
 Route::middleware(['auth', 'role:all'])->group(function () {
     Route::get('/aula/{id}/calendario',\App\Http\Livewire\Reserva\Calendario::class );
     Route::get('/reserva/crear', \App\Http\Livewire\Reserva\CrearReserva::class);
     Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class );
-
 });
+
+
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
