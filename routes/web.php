@@ -56,11 +56,14 @@ Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
     ->name('gestionar_usuario_c')->middleware('auth');
 Route::get('/reporte',\App\Http\Livewire\Pdf::class);
 
-Route::get('/gestionar_modulo_c',\App\Http\Livewire\GestionarModuloC::class)
+Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
     ->name('gestionar_modulo_c')->middleware('auth');
 
-Route::get('/gestionar_aula_c',\App\Http\Livewire\GestionarAulaC::class)
+Route::get('/gestionar_aula_c/{$elId}',\App\Http\Livewire\GestionarAulaC::class)
     ->name('gestionar_aula_c')->middleware('auth');
+
+Route::get('/gestionar_facultad_c',\App\Http\Livewire\GestionarFacultadC::class)
+    ->name('gestionar_facultad_c')->middleware('auth');
 
 Route::get('/login',function(){
     return view('auth.login');

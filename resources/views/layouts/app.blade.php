@@ -29,13 +29,8 @@
                     </a>
                     @endauth
                     @auth
-                        <a href="{{ route('gestionar_modulo_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            Gestionar Módulo
-                        </a>
-                    @endauth
-                    @auth
-                        <a href="{{ route('gestionar_aula_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            Gestionar Aula
+                        <a href="{{ route('gestionar_facultad_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                            Gestionar Facultad
                         </a>
                     @endauth
                 </div>

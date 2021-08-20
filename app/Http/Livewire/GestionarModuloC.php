@@ -15,10 +15,15 @@ class GestionarModuloC extends Component
     public $numero;
     public $facultadId;
     public $elId;
+    public $facuID;
+    public function mount($id){
+        $this->facuID = $id;
+    }
     public function render()
     {
         return view('livewire.gestionar_modulo_c',
             ['modulos'=>modulo::where('nro','like',"%{$this->buscar}%")
+                ->where('facultad_id','=',$this->facuID)
                 ->paginate($this->nrosPagina)]);
     }
 
@@ -26,8 +31,8 @@ class GestionarModuloC extends Component
         $this->idActual = $elId;
     }
 
-    public function irAulas(){
-        return redirect()->route('gestionar_aula_c');
+    public function irAulas($elId){
+        return redirect()->route('gestionar_aula_c',[$elId]);
     }
 
     public function crear(){
