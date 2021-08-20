@@ -18,27 +18,26 @@
     <div id="app">
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
-                <div class="space-x-5">
-                    <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
-                    <a href="{{ route('gestionar_usuario_c') }}"
-                       class="text-lg font-semibold text-gray-100 no-underline"  :active="request()->routeIs('gestionar_usuario_c')">
-                        Gestionar Usuario
-                    </a>
-                    @endauth
-                    @auth
-                        <a href="{{ route('gestionar_modulo_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            Gestionar Módulo
-                        </a>
-                    @endauth
-                    @auth
-                        <a href="{{ route('gestionar_aula_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            Gestionar Aula
-                        </a>
+                    <x-nav-link href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
+                        {{ __('Gestionar Usuario') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('gestionar_modulo_c') }}" :active="request()->routeIs('gestionar_modulo_c')">
+                        {{ __('Gestionar Módulo') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('gestionar_aula_c') }}" :active="request()->routeIs('gestionar_aula_c')">
+                        {{ __('Gestionar Aula') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
+                        {{ __('Gestionar Reserva') }}
+                    </x-nav-link>
                     @endauth
                 </div>
+
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>

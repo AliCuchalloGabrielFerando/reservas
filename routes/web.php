@@ -46,9 +46,10 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth', 'role:all'])->group(function () {
-    Route::get('/aula/{id}/calendario',\App\Http\Livewire\Reserva\Calendario::class );
-    Route::get('/reserva/crear', \App\Http\Livewire\Reserva\CrearReserva::class);
-    Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class );
+    Route::get('/reservas', \App\Http\Livewire\Reserva\Reservas::class)->name('reservas');
+    Route::get('/aula/{id}/calendario',\App\Http\Livewire\Reserva\Calendario::class )->name('reserva.calendario');
+    Route::get('/reserva/{id?}', \App\Http\Livewire\Reserva\CrearReserva::class)->name('reserva.crear');
+    //Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class)->name('reserva.editar');
 });
 
 
@@ -283,6 +284,7 @@ Route::get('/carga',function(){
   return "hola";
 
 });
+
 Route::get('/prueba',function(){
     return "hola mundo";
 });

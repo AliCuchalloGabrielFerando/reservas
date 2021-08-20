@@ -37,8 +37,8 @@ class CreateReservaTable extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger("materia_paralelo_id");
-            $table->foreign("materia_paralelo_id")->references("id")
+            $table->unsignedBigInteger("materia_grupom_id");
+            $table->foreign("materia_grupom_id")->references("id")
                 ->on("materia_grupom")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
