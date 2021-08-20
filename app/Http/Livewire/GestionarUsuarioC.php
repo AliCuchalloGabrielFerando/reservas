@@ -31,6 +31,7 @@ class GestionarUsuarioC extends Component
     public $auxiliarCod;
     public $grupoId;
     public $crearEmail;
+    public $idActual;
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
@@ -44,22 +45,26 @@ class GestionarUsuarioC extends Component
         $this->resetPage();
     }
 
+    /*public function idActual($elId){
+        $this->idActual = $elId;
+    }*/
+
     public  function clear(){
         $this->search= "";
         $this->page= 1;
         $this->nrosPagina= "3";
     }
 
-    public function cambioPag($id){
-        $this->otraPagina = $id;
+    public function irEditar($elId){
+        $this->otraPagina = $elId;
         $usuarioC = User::find($this->otraPagina);
         $this->nuevoNombre = $usuarioC->name;
         $this->nuevoUsuario = $usuarioC->usuario;
         $this->nuevoPass = $usuarioC->password;
     }
 
-    public function eliminarPag($id){
-        $usuarioEliminado = User::find($id);
+    public function eliminarPag(){
+        $usuarioEliminado = User::find($this->idActual);
         $usuarioEliminado-> delete();
     }
 

@@ -18,18 +18,19 @@
     <div id="app">
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
-                <div>
+                <div class="space-x-5">
                     <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     @auth
-                    <a href="{{ route('gestionar_usuario_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                    <a href="{{ route('gestionar_usuario_c') }}"
+                       class="text-lg font-semibold text-gray-100 no-underline"  :active="request()->routeIs('gestionar_usuario_c')">
                         Gestionar Usuario
                     </a>
                     @endauth
                     @auth
-                        <a href="{{ route('gestionar_usuario_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                            Gestionar Módulo
+                        <a href="{{ route('gestionar_facultad_c') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                            Gestionar Facultad
                         </a>
                     @endauth
                 </div>
