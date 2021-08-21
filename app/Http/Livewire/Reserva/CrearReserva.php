@@ -110,15 +110,12 @@ class CrearReserva extends Component
             foreach ($reserva_aula as $r_a) {
                 $this->dias_reservados->push(['hora_inicio' => $r_a->hora_inicio, 'hora_fin' => $r_a->hora_fin, 'dias' => $r_a->dias]);
             }
-
-
         }
     }
 
 
     public function updated($propertyName)
     {
-
         if ($propertyName == 'materia') {
             if($this->materia!=0) {
                 $this->grupos = grupom::select('grupom.*')
@@ -134,7 +131,7 @@ class CrearReserva extends Component
 
     public function render()
     {
-        return view('livewire.reserva.crear-reserva');
+            return view('livewire.reserva.crear-reserva');
     }
 
     public function reservar()
