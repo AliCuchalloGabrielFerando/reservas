@@ -21,7 +21,7 @@
                 @endforeach
             </x-selector>
         </div>
-        @if($reserva_actual!=null)
+        @if(!$crear)
         <div>
             <x-label for="estado">Estado</x-label>
             <x-selector wire:model="estado" name="estado" id="estado">
@@ -35,7 +35,8 @@
         <div>
             <x-label for="sigla">Materia</x-label>
             <x-selector wire:model="materia" name="sigla" id="sigla">
-                @foreach($materias as $mat)
+                <option value="0">Ninguna</option>
+            @foreach($materias as $mat)
                     <option value="{{$mat->id}}">{{$mat->nombre}}</option>
                 @endforeach
             </x-selector>
@@ -44,6 +45,7 @@
         <div>
             <x-label for="grupo">Grupo</x-label>
             <x-selector wire:model="grupo" name="grupo" id="grupo">
+                <option value="0">Ninguno</option>
                 @foreach($grupos as $gru)
                     <option value="{{$gru->id}}">{{$gru->nombre}}</option>
                 @endforeach
@@ -73,7 +75,7 @@
             <x-text-area wire:model="actividad" name="actividad" id="actividad"></x-text-area>
         </div>
         <div class="flex justify-center col-span-full">
-            <x-button> {{$reserva_actual==null?'Reservar':'Guardar'}}</x-button>
+            <x-button> {{$crear?'Reservar':'Guardar'}}</x-button>
         </div>
     </form>
 

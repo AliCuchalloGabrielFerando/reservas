@@ -4,13 +4,11 @@
     {{'Reservar'}}</x-a>
 </div>
     @foreach($aulas as $aula)
-        <x-a href="{{route('reserva.crear',['id'=>$aula->reserva_id])}}" class="flex flex-col space-y-3">
+        <x-a href="{{route('reserva.calendario',['id'=>$aula->reserva_id])}}" class="flex flex-col space-y-3">
             <span>
                 Laboratorio {{$aula->codigo_aula}}
             </span>
-            <span>
-                {{$aula->hora_inicio.' - '.$aula->hora_fin}}
-            </span>
+
             <span>
                {{$aula->fecha_inicio.' - '.$aula->fecha_fin}}
             </span>

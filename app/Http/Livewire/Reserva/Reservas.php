@@ -20,7 +20,7 @@ class Reservas extends Component
          * Carbon::now('America/La_Paz')->locale('es')->dayName;
          */
 
-        $this->aulas=aula::select('aula.*', 'reserva_aula.hora_inicio', 'reserva_aula.hora_fin', 'reserva.fecha_inicio', 'reserva.fecha_fin','reserva.id as reserva_id')
+        $this->aulas=aula::select('aula.*','reserva.id as reserva_id')
             ->join('reserva_aula','aula_id','=','aula.id')
             ->join('reserva','reserva_id','=','reserva.id')
             ->whereDate('reserva.fecha_fin','>=',$date)

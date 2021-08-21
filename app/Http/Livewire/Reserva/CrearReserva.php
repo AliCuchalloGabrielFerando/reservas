@@ -50,6 +50,8 @@ class CrearReserva extends Component
     public $hora_inicio;
     public $hora_fin;
 
+    public $crear;
+
     public function mount($id = null)
     {
         $this->dias = collect([]);
@@ -61,10 +63,11 @@ class CrearReserva extends Component
         $this->prioridades = Prioridad::all();
 
         if ($id == null) {
+            $this->crear=true;
             $this->estado = Estado::where('nombre', 'Proceso')->first()->id;
 
             $this->beneficiario = $this->personas->first()->ci;
-            $this->materia = $this->materias->first()->id;
+            $this->materia = 0;
             $this->laboratorio = $this->laboratorios->first()->id;
             $this->prioridad = $this->prioridades->first()->id;
 
@@ -72,20 +75,28 @@ class CrearReserva extends Component
                 ->join('materia_grupom', 'grupom_id', '=', 'grupom.id')
                 ->where('materia_grupom.materia_id', $this->materia)->get();
 
-            $this->grupo = $this->grupos->first()->id;
+            $this->grupo = 0;
 
         } else {
+            $this->crear=false;
             $this->reserva_actual = reserva::find($id);
             $this->estado = $this->reserva_actual->estado_id;
             $this->beneficiario = $this->reserva_actual->persona_ci;
             $this->prioridad = $this->reserva_actual->prioridad_id;
 
-            $materia_grupo = materia_grupom::where('id', $this->reserva_actual->materia_grupom_id)->first();
+            if($this->reserva_actual->materia_grupom_id==null){
+                $this->grupo = 0;
+                $this->materia =0;
+            }else{
+                $materia_grupo = materia_grupom::where('id', $this->reserva_actual->materia_grupom_id)->first();
+                $this->grupo = $materia_grupo->grupom_id;
+                $this->materia = $materia_grupo->materia_id;
+            }
+
             $reserva_aula = reserva_aula::where('reserva_id', $this->reserva_actual->id)->get();
             $this->estados = Estado::all();
 
-            $this->grupo = $materia_grupo->grupom_id;
-            $this->materia = $materia_grupo->materia_id;
+
             $this->laboratorio = $reserva_aula->first()->aula_id;
 
             $this->fecha_inicio = $this->reserva_actual->fecha_inicio;
@@ -109,11 +120,15 @@ class CrearReserva extends Component
     {
 
         if ($propertyName == 'materia') {
-            $this->grupos = grupom::select('grupom.*')
-                ->join('materia_grupom', 'grupom_id', '=', 'grupom.id')
-                ->where('materia_grupom.materia_id', $this->materia)->get();
+            if($this->materia!=0) {
+                $this->grupos = grupom::select('grupom.*')
+                    ->join('materia_grupom', 'grupom_id', '=', 'grupom.id')
+                    ->where('materia_grupom.materia_id', $this->materia)->get();
 
-            $this->grupo = $this->grupos->first()->id;
+                $this->grupo = $this->grupos->first()->id;
+            }else{
+                $this->grupo=0;
+            }
         }
     }
 
@@ -150,6 +165,7 @@ class CrearReserva extends Component
         try {
             $gestion = gestion_academica::latest('created_at')->first();
 
+
             $materia_grupo = materia_grupom::where('materia_id', $this->materia)
                 ->where('grupom_id', $this->grupo)->first();
 
@@ -163,7 +179,7 @@ class CrearReserva extends Component
 
             $this->reserva_actual->estado_id = $this->estado;
             $this->reserva_actual->prioridad_id = $this->prioridad;
-            $this->reserva_actual->materia_grupom_id = $materia_grupo->id;
+            $this->reserva_actual->materia_grupom_id = $materia_grupo==null?null:$materia_grupo->id;
             $this->reserva_actual->gestion_academica_id = $gestion->id;
             $this->reserva_actual->persona_ci = $this->beneficiario;
             $this->reserva_actual->jefe_lab_cod = Auth::user()->id;
@@ -182,7 +198,9 @@ class CrearReserva extends Component
                 ]);
             }
 
+
             DB::commit();
+            return $this->redirect('reservas');
         } catch (\Exception $e) {
             dd($e);
             DB::rollback();
