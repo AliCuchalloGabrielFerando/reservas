@@ -13,7 +13,7 @@ class Pdfs extends Component
 {
     public function render()
     {
-        return view('livewire.pdf');
+        return view('livewire.pdfs');
 
     }
     public function descargar(){

@@ -70,7 +70,7 @@ ROute::get('/ver',function (){
     ]);
     return $pdf->stream();
 });
-Route::get('/reporte',\App\Http\Livewire\Pdf::class);
+Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
 
 Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
     ->name('gestionar_modulo_c')->middleware('auth');
@@ -299,6 +299,55 @@ Route::get('/carga',function(){
   ]);
   return "hola";
 
+});
+Route::get('/personitas',function (){
+    $persona3 = persona::create([
+        "ci"=>"7541755",
+        "apellidoM"=>"materno",
+        "apellidoP"=>"paterno",
+        "nombre"=>"daniel"
+    ]);
+    $persona3 = persona::create([
+        "ci"=>"7541758",
+        "apellidoM"=>"materno",
+        "apellidoP"=>"paterno",
+        "nombre"=>"oscar"
+    ]);
+    $persona3 = persona::create([
+        "ci"=>"7541754",
+        "apellidoM"=>"materno",
+        "apellidoP"=>"paterno",
+        "nombre"=>"marco"
+    ]);
+
+    $jefe = jefe_lab::create([
+        "cod"=>"3",
+        "correo"=>"miranda@gmail.com",
+        "telefono"=>"751615",
+        "persona_ci"=>"7541755"
+    ]);
+
+    $auxiliar = auxiliar::create([
+        "cod"=>"4",
+        "alta_baja"=>"nose",
+        "ciudad"=>"mifacultad",
+        "correo"=>"taborga@gmail.com",
+        "usuario"=>"asociado",
+        "fechaR"=>"2021-07-22",
+        "fecha_nacimiento"=>"2001-07-22",
+        "codigo_aux"=>"100",
+        "registro"=>"1500",
+        "telefono"=>"54221",
+        "numero_formulario"=>"100",
+        "cv"=>"100101010",
+        "persona_ci"=>"7541758",
+        "tipo_auxiliar_id"=>"1"
+    ]);
+    $docente = docente::create([
+        "cod"=>"2",
+        "persona_ci"=>"7541754"
+    ]);
+    return "vamoss";
 });
 Route::get('/prueba',function(){
     return "hola mundo";

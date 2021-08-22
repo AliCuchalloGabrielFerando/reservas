@@ -2,7 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\grupo;
+use App\Models\jefe_lab;
+use App\Models\persona;
+use App\Models\reporte;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,13 +17,14 @@ use Livewire\WithPagination;
 class GestionarUsuarioC extends Component
 {
     use WithPagination;
-    public $search="";
+
+    public $search = "";
     protected $queryString = [
-        'search'=>['except'=>''],
-        'nrosPagina'=>['except'=>'']
+        'search' => ['except' => ''],
+        'nrosPagina' => ['except' => '']
     ];
-    public $otraPagina= "actual";
-    public $nrosPagina ="3";
+    public $otraPagina = "actual";
+    public $nrosPagina = "3";
     public $nuevoNombre;
     public $nuevoUsuario;
     public $nuevoPass;
@@ -27,17 +34,46 @@ class GestionarUsuarioC extends Component
     public $crearFechaR;
     public $alta_baja;
     public $docenteCod;
+    public $jefeLabNombre = "";
+    public $docenteNombre = "";
+    public $auxiliarNombre = "";
     public $jefeLabCod;
     public $auxiliarCod;
     public $grupoId;
     public $crearEmail;
     public $idActual;
+    public $persona_ci;
+    public $grupoNombre = "";
+
+
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
-        ['usuarios'=>User::where('name','like',"%{$this->search}%")
-            ->orwhere('usuario','like',"%{$this->search}%")
-            ->paginate($this->nrosPagina)]);
+            ['usuarios' => User::where('name', 'like', "%{$this->search}%")
+                ->orwhere('usuario', 'like', "%{$this->search}%")
+                ->paginate($this->nrosPagina),
+                'grupos' => grupo::where('nombre', 'like', "%{$this->grupoNombre}%")->get(),
+
+                'jefes' => DB::table('persona')
+                    ->rightJoin('jefe_lab', 'ci', '=', 'persona_ci')
+                    ->leftjoin('users', 'cod', '=', 'jefe_lab_cod')
+                    ->whereNull('jefe_lab_cod')
+                  //  ->where('nombre', 'like', "%{$this->jefeLabNombre}%")
+                    ->get(),
+                'docentes' => DB::table('persona')
+                    ->rightJoin('docente', 'ci', '=', 'persona_ci')
+                    ->leftjoin('users', 'cod', '=', 'docente_cod')
+                    ->whereNull('docente_cod')
+                  //  ->where('nombre', 'like', "%{$this->docenteNombre}%")
+                    ->get(),
+                'auxiliares' => DB::table('persona')
+                    ->rightJoin('auxiliar', 'ci', '=', 'persona_ci')
+                    ->leftjoin('users', 'cod', '!=', 'auxiliar_cod')
+                    ->whereNull('auxiliar_cod')
+                  //  ->where('nombre', 'like', "%{$this->auxiliarNombre}%")
+                    ->get(),
+
+            ]);
     }
 
     public function updatingSearch()
@@ -49,13 +85,15 @@ class GestionarUsuarioC extends Component
         $this->idActual = $elId;
     }*/
 
-    public  function clear(){
-        $this->search= "";
-        $this->page= 1;
-        $this->nrosPagina= "3";
+    public function clear()
+    {
+        $this->search = "";
+        $this->page = 1;
+        $this->nrosPagina = "3";
     }
 
-    public function irEditar($elId){
+    public function irEditar($elId)
+    {
         $this->otraPagina = $elId;
         $usuarioC = User::find($this->otraPagina);
         $this->nuevoNombre = $usuarioC->name;
@@ -63,48 +101,148 @@ class GestionarUsuarioC extends Component
         $this->nuevoPass = $usuarioC->password;
     }
 
-    public function eliminarPag(){
+    public function eliminarPag()
+    {
         $usuarioEliminado = User::find($this->idActual);
-        $usuarioEliminado-> delete();
+        $tipo_usuarioEditado = "";
+        if (isset($usuarioEliminado->jefe_lab)) {
+            $tipo_usuarioEditado = "jefe de laboratorio";
+        } else if (isset($usuarioEliminado->docente)) {
+            $tipo_usuarioEditado = "docente";
+        } else {
+            $tipo_usuarioEditado = "auxiliar";
+        }
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se elimino la cuenta " . $usuarioEliminado->name . " con usuario: "
+            . $usuarioEliminado->usuario . " de tipo: " . $tipo_usuarioEditado;
+        $reporte->fecha = Carbon::now();
+
+        $reporte->save();
+        $usuarioEliminado->delete();
     }
 
-    public function cancelar(){
+    public function cancelar()
+    {
         $this->otraPagina = "actual";
     }
 
-    public function editar(){
+    public function editar()
+    {
         $usuarioEditado = User::find($this->otraPagina);
         $usuarioEditado->name = $this->nuevoNombre;
         $usuarioEditado->usuario = $this->nuevoUsuario;
         $usuarioEditado->password = Hash::make($this->nuevoPass);
         $usuarioEditado->save();
+        $tipo_usuarioEditado = "";
+        if (isset($usuarioEditado->jefe_lab)) {
+            $tipo_usuarioEditado = "jefe de laboratorio";
+        } else if (isset($usuarioEditado->docente)) {
+            $tipo_usuarioEditado = "docente";
+        } else {
+            $tipo_usuarioEditado = "auxiliar";
+        }
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se edito el usuario " . $usuarioEditado->name . " con usuario: "
+            . $usuarioEditado->usuario . " de tipo: " . $tipo_usuarioEditado;
+        $reporte->fecha = Carbon::now();
+        $reporte->save();
+
+        $this->crearEmail = '';
+        $this->crearFechaR = '';
+        $this->crearNombre = '';
+        $this->crearPass = '';
+        $this->crearUsuario = '';
+
+
         $this->otraPagina = "actual";
     }
 
-    public function crear(){
+    public function crear()
+    {
         $this->otraPagina = "crear";
     }
 
-    public function guardarCrear(){
+    public function guardarCrear($grupo_id)
+    {
         $usuarioGuardar = new User();
         $usuarioGuardar->name = $this->crearNombre;
         $usuarioGuardar->password = Hash::make($this->crearPass);
         $usuarioGuardar->usuario = $this->crearUsuario;
         $usuarioGuardar->alta_baja = $this->alta_baja;
-        $usuarioGuardar->fechaR = $this->crearFechaR;
-        $usuarioGuardar->grupo_id = $this->grupoId;
+        $usuarioGuardar->fechaR = Carbon::now()->format('y-m-d');
+        $usuarioGuardar->grupo_id = $grupo_id;
+
+        $tipo_usuario="";
         if ($this->docenteCod != '') {
             $usuarioGuardar->docente_cod = $this->docenteCod;
+            $tipo_usuario = "docente";
+            $this->docenteCod = '';
         }
-        if ($this->docenteCod != '') {
+        if ($this->jefeLabCod != '') {
+            $jefe = jefe_lab::where('persona_ci', '=', $this->persona_ci)->first();
+            $this->jefeLabCod = $jefe->cod;
             $usuarioGuardar->jefe_lab_cod = $this->jefeLabCod;
+            $tipo_usuario = "jefe de laboratorio";
+            $this->jefeLabCod = '';
         }
-        if ($this->docenteCod != '') {
+        if ($this->auxiliarCod != '') {
             $usuarioGuardar->auxiliar_cod = $this->auxiliarCod;
+            $tipo_usuario= "auxiliar";
+            $this->auxiliarCod = '';
         }
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se creo el usuario " . $this->crearNombre . " con usuario: "
+            . $this->crearUsuario . " de tipo: " . $tipo_usuario;
+        $reporte->fecha = Carbon::now();
+        $reporte->save();
+
         $usuarioGuardar->email = $this->crearEmail;
-        $usuarioGuardar-> save();
+        $usuarioGuardar->save();
+        $this->crearEmail = '';
+        $this->crearFechaR = '';
+        $this->crearNombre = '';
+        $this->crearPass = '';
+        $this->crearUsuario = '';
+
+
         $this->otraPagina = "actual";
 
+    }
+
+    public function requerido($grupo_id)
+    {
+        $this->grupoId = $grupo_id;
+
+    }
+
+    public function requeridoJefe($persona_ci)
+    {
+        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
+        $this->persona_ci = $persona_ci;
+        $this->jefeLabCod = 'entrar';
+    }
+
+    public function requeridoAuxiliar($persona_ci)
+    {
+        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
+        $this->persona_ci = $persona_ci;
+        $this->auxiliarCod = 'entrar';
+    }
+
+    public function requeridoDocente($persona_ci)
+    {
+        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
+        $this->persona_ci = $persona_ci;
+        $this->docenteCod = 'entrar';
     }
 }
