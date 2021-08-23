@@ -28,10 +28,6 @@
                             {{ __('Gestionar Facultad') }}
                         </x-nav-link>
 
-                    <x-nav-link href="{{ route('gestionar_aula_c') }}" :active="request()->routeIs('gestionar_aula_c')">
-                        {{ __('Gestionar Aula') }}
-                    </x-nav-link>
-
                     <x-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
