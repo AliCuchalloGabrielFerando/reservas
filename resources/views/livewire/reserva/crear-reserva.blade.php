@@ -1,5 +1,9 @@
 <div>
     <h2 class="text-2xl font-semibold m-5">Formulario de solicitud de reserva</h2>
+    <div class="flex flex flex-grow justify-end content-start ml-8 mr-5">
+        <p class="text-sm text-gray-500"> las visitas a esta pagina
+            son: {{$contador_pagina_reserva_crear->visitas}}</p>
+    </div>
     <form class="grid grid-cols-5 gap-4 p-5"  wire:submit.prevent="reservar">
 
         <div class="col-span-2">

@@ -57,6 +57,10 @@
             @endforeach
         </div>
         <div class="flex justify-end">
+            <div class="flex flex flex-grow justify-start content-start ml-8">
+                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                    son: {{$contador_pagina_aula_vista->visitas}}</p>
+            </div>
             <button wire:click="crear" type="button"
                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Crear Aula
@@ -75,15 +79,15 @@
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Usuario</label>
-                                    <input wire:model="usuario" type="text" name="usuario" id="usuario" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="usuario" readonly type="text" name="usuario" id="usuario" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Fecha de Registro</label>
-                                    <input wire:model="fechaR" type="date" name="fechaR" id="fechaR" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="fechaR" type="date" name="fechaR" id="fechaR"  required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Alta_Baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja"  maxlength="6" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Descripción de ubicación</label>
@@ -94,12 +98,19 @@
                                     <input wire:model="capacidad" type="number" name="capacidad" id="capacidad" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Código de Lugar</label>
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Código de Aula</label>
                                     <input wire:model="codigo_aula" type="number" name="codigo_aula" id="codigo_aula" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre de Tipo de Aula</label>
-                                    <input wire:model="nombreAula" type="text" name="tipoAula" id="tipoAula" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <select
+                                        class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                        wire:model="tipo_id"  name="tipo_id" id="tipo_id" required>
+                                        <option value="" selected>Elija el tipo de aula </option>
+                                        @foreach($tipos_aulas as $tip)
+                                            <option value="{{$tip->id}}">{{$tip->nombre}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Número de Módulo</label>
@@ -114,6 +125,10 @@
                             <button wire:click="cancelar" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Cancelar
                             </button>
+                            <div class="flex flex flex-grow justify-start content-start ml-8">
+                                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                                    son: {{$contador_pagina_aula_crear->visitas}}</p>
+                            </div>
                         </div>
                     </div>
                 </form>

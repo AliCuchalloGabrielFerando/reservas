@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Reserva;
 
 use App\Models\aula;
+use App\Models\contador_pagina;
 use App\Models\Estado;
 use App\Models\gestion_academica;
 use App\Models\grupo;
@@ -52,8 +53,20 @@ class CrearReserva extends Component
 
     public $crear;
 
+    public $contador_pagina_reserva_crear;
     public function mount($id = null)
     {
+        $this->contador_pagina_reserva_crear = contador_pagina::where('nombre','=','reserva_crear')->first();
+        if(!isset($this->contador_pagina_reserva_crear)){
+            $this->contador_pagina_reserva_crear =  contador_pagina::create([
+                "nombre"=>"reserva_crear",
+                "visitas"=>1
+            ]);
+        }else{
+            $this->contador_pagina_reserva_crear->visitas++;
+            $this->contador_pagina_reserva_crear->save();
+        }
+
         $this->dias = collect([]);
         $this->dias_reservados = collect([]);
 

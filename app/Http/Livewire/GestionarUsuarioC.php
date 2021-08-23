@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\contador_pagina;
 use App\Models\grupo;
 use App\Models\jefe_lab;
 use App\Models\persona;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use function Sodium\increment;
 
 
 class GestionarUsuarioC extends Component
@@ -44,8 +46,36 @@ class GestionarUsuarioC extends Component
     public $idActual;
     public $persona_ci;
     public $grupoNombre = "";
+    public $contador_pagina_usuario_vista;
+    public $contador_pagina_usuario_crear;
+    public $contador_pagina_usuario_editar;
 
-
+    public function mount(){
+        $this->contador_pagina_usuario_crear = contador_pagina::where('nombre','=','usuario_crear')->first();
+        $this->contador_pagina_usuario_vista = contador_pagina::where('nombre','=','usuario_vista')->first();
+        $this->contador_pagina_usuario_editar = contador_pagina::where('nombre','=','usuario_editas')->first();
+        if(!isset($this->contador_pagina_usuario_crear)){
+            $this->contador_pagina_usuario_crear = contador_pagina::create([
+                "nombre"=>"usuario_crear",
+                "visitas"=>0
+            ]);
+        }
+        if(!isset($this->contador_pagina_usuario_vista)){
+            $this->contador_pagina_usuario_vista =  contador_pagina::create([
+                "nombre"=>"usuario_vista",
+                "visitas"=>1
+            ]);
+        }else{
+            $this->contador_pagina_usuario_vista->visitas++;
+            $this->contador_pagina_usuario_vista->save();
+        }
+        if(!isset($this->contador_pagina_usuario_editar)){
+            $this->contador_pagina_usuario_editar = contador_pagina::create([
+                "nombre"=>"usuario_editar",
+                "visitas"=>0
+            ]);
+        }
+    }
     public function render()
     {
         return view('livewire.gestionar_usuario_c',
@@ -99,6 +129,9 @@ class GestionarUsuarioC extends Component
         $this->nuevoNombre = $usuarioC->name;
         $this->nuevoUsuario = $usuarioC->usuario;
         $this->nuevoPass = $usuarioC->password;
+
+        $this->contador_pagina_usuario_editar->visitas++;
+        $this->contador_pagina_usuario_editar->save();
     }
 
     public function eliminarPag()
@@ -127,6 +160,8 @@ class GestionarUsuarioC extends Component
     public function cancelar()
     {
         $this->otraPagina = "actual";
+        $this->contador_pagina_usuario_vista->visitas++;
+        $this->contador_pagina_usuario_vista->save();
     }
 
     public function editar()
@@ -166,6 +201,8 @@ class GestionarUsuarioC extends Component
     public function crear()
     {
         $this->otraPagina = "crear";
+        $this->contador_pagina_usuario_crear->visitas++;
+        $this->contador_pagina_usuario_crear->save();
     }
 
     public function guardarCrear($grupo_id)
@@ -208,6 +245,8 @@ class GestionarUsuarioC extends Component
 
         $usuarioGuardar->email = $this->crearEmail;
         $usuarioGuardar->save();
+
+
         $this->crearEmail = '';
         $this->crearFechaR = '';
         $this->crearNombre = '';

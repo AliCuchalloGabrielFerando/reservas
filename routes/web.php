@@ -54,52 +54,57 @@ Route::middleware(['auth', 'role:all'])->group(function () {
     //Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class)->name('reserva.editar');
 });
 
+Route::middleware(['auth','role:jefe laboratorio'])->group(function (){
+    Route::get('/reporte',\App\Http\Livewire\Pdfs::class)->name('reporte');
+
+    Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
+        ->name('gestionar_modulo_c')->middleware('auth');
+
+    Route::get('/gestionar_aula_c/{id}',\App\Http\Livewire\GestionarAulaC::class)
+        ->name('gestionar_aula_c')->middleware('auth');
+
+    Route::get('/gestionar_facultad_c',\App\Http\Livewire\GestionarFacultadC::class)
+        ->name('gestionar_facultad_c')->middleware('auth');
+    Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
+        ->name('gestionar_usuario_c')->middleware('auth');
+    Route::get('/reporte',\App\Http\Livewire\Pdfs::class)
+        ->name('reporte');
+    Route::get('/ver/{fecha_inicio?}/{fecha_fin?}', [\App\Http\Controllers\ReporteController::class, 'index'])
+        ->name('ver');;
+
+});
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
-    ->name('gestionar_usuario_c')->middleware('auth');
-Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
-Route::get('/repo',function (){
+
+/*Route::get('/repo',function (){
     $pdf = App::make('dompdf.wrapper');
     $pdf->loadView('reportenuevo');
     return $pdf->stream();
-});
+});*/
 
-Route::get('/ver/{fecha_inicio?}/{fecha_fin?}', [\App\Http\Controllers\ReporteController::class, 'index'])->name('ver');;
 /*Route::get('/ver/{fecha_inicio?}/{fecha_fin?}',function (){
-   // return view('reporte',[ 'users' => user::all()]);
     $pdf = App::make('dompdf.wrapper');
-   // $pdf->set_protocol(WWW_ROOT);
     $pdf->loadView('reporte',[
-        'users' => user::all()
-    ]);
+        'users' => user::all() ]);
     return $pdf->stream();
 })->name('ver');*/
-Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
 
-Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
-    ->name('gestionar_modulo_c')->middleware('auth');
-
-Route::get('/gestionar_aula_c/{id}',\App\Http\Livewire\GestionarAulaC::class)
-    ->name('gestionar_aula_c')->middleware('auth');
-
-Route::get('/gestionar_facultad_c',\App\Http\Livewire\GestionarFacultadC::class)
-    ->name('gestionar_facultad_c')->middleware('auth');
 
 Route::get('/login',function(){
     return view('auth.login');
-
 })->name('/');
 
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
-Route::get('profile', function () {
+/*Route::get('profile', function () {
   // Only authenticated users may enter...
   return "Hola";
-})->middleware('auth','role:all');
+})->middleware('auth','role:all');*/
 
 Route::post('/login',[LoginController::class,'login'])->name('login');
+
+
 Route::get('/poblado',function (){
     $universidad = universidad::create([
         "nombre"=>"universidad autonoma gabriel rene moreno",
@@ -356,6 +361,4 @@ Route::get('/personitas',function (){
     return "vamoss";
 });
 
-Route::get('/prueba',function(){
-    return "hola mundo";
-});
+
