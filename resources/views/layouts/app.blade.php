@@ -24,9 +24,9 @@
                         {{ __('Gestionar Usuario') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('gestionar_modulo_c') }}" :active="request()->routeIs('gestionar_modulo_c')">
-                        {{ __('Gestionar Módulo') }}
-                    </x-nav-link>
+                        <x-nav-link href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
+                            {{ __('Gestionar Facultad') }}
+                        </x-nav-link>
 
                     <x-nav-link href="{{ route('gestionar_aula_c') }}" :active="request()->routeIs('gestionar_aula_c')">
                         {{ __('Gestionar Aula') }}
@@ -35,10 +35,11 @@
                     <x-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
+
+
                     @endauth
                     <button class="bg-white dark:bg-red-500" id="switchTheme">tema</button>
                 </div>
-
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>

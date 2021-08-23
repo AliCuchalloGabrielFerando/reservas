@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\facultad;
 use App\Models\modulo;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -15,10 +16,21 @@ class GestionarModuloC extends Component
     public $numero;
     public $facultadId;
     public $elId;
+    public $facuID;
+    public $facultad;
+    public $facultadNombre;
+
+    public function mount($id){
+        $facultad = facultad::where('id','=',$id)->first();
+        $this->facultadNombre = $facultad->nombre;
+        $this->facuID = $facultad->id;
+    }
+
     public function render()
     {
         return view('livewire.gestionar_modulo_c',
             ['modulos'=>modulo::where('nro','like',"%{$this->buscar}%")
+                ->where('facultad_id','=',$this->facuID)
                 ->paginate($this->nrosPagina)]);
     }
 
@@ -26,8 +38,8 @@ class GestionarModuloC extends Component
         $this->idActual = $elId;
     }
 
-    public function irAulas(){
-        return redirect()->route('gestionar_aula_c');
+    public function irAulas($elId){
+        return redirect()->route('gestionar_aula_c',[$elId]);
     }
 
     public function crear(){

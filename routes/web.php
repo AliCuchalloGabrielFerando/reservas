@@ -18,9 +18,11 @@ use App\Models\jefe_lab;
 use App\Models\persona;
 use App\Models\tipo_auxiliar;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminRole;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,13 +59,31 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('/gestionar_usuario_c',\App\Http\Livewire\GestionarUsuarioC::class)
     ->name('gestionar_usuario_c')->middleware('auth');
-Route::get('/reporte',\App\Http\Livewire\Pdf::class);
+Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
+Route::get('/repo',function (){
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadView('reportenuevo');
+    return $pdf->stream();
+});
+ROute::get('/ver',function (){
+   // return view('reporte',[ 'users' => user::all()]);
+    $pdf = App::make('dompdf.wrapper');
+   // $pdf->set_protocol(WWW_ROOT);
+    $pdf->loadView('reporte',[
+        'users' => user::all()
+    ]);
+    return $pdf->stream();
+});
+Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
 
-Route::get('/gestionar_modulo_c',\App\Http\Livewire\GestionarModuloC::class)
+Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
     ->name('gestionar_modulo_c')->middleware('auth');
 
-Route::get('/gestionar_aula_c',\App\Http\Livewire\GestionarAulaC::class)
+Route::get('/gestionar_aula_c/{id}',\App\Http\Livewire\GestionarAulaC::class)
     ->name('gestionar_aula_c')->middleware('auth');
+
+Route::get('/gestionar_facultad_c',\App\Http\Livewire\GestionarFacultadC::class)
+    ->name('gestionar_facultad_c')->middleware('auth');
 
 Route::get('/login',function(){
     return view('auth.login');

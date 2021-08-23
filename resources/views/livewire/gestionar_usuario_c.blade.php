@@ -12,9 +12,9 @@
                         >
                     <select wire:model="nrosPagina"
                             class="form-input rounded-md shadow-sm mt-1 block outline-none text-gray-500">
-                        <option value="3"> 3 por pagina</option>
-                        <option value="5"> 5 por pagina</option>
-                        <option value="10"> 10 por pagina</option>
+                        <option value="3"> 3 por página</option>
+                        <option value="5"> 5 por página</option>
+                        <option value="10"> 10 por página</option>
                     </select>
                         @if($search !== '')
                             <button wire:click ="clear" class="form-input rounded-md shadow-sm mt-1 block outline-none text-gray-500">
