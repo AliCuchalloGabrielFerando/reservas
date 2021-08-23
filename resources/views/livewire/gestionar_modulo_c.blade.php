@@ -18,7 +18,7 @@
                     <span class="block font-semibold text-xl">Módulo {{$modulo->nro}}</span>
                     <br>
                         <div class="flex justify-between">
-                        <button wire:click="irAulas($modulo->$id)" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button wire:click="irAulas({{$modulo->id}})" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Ver Aulas
                         </button>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -81,8 +81,8 @@
                                 <input wire:model="numero" type="number" name="numero" id="numero" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="last-name" class="block text-sm font-medium text-gray-700">Id de Facultad</label>
-                                <input wire:model="facultadId" type="number" name="facultadId" id="facultadId" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre de Facultad</label>
+                                <input wire:model="facultadNombre" type="text" name="facultadNombre" id="facultadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                             </div>
                         </div>
                     </div>

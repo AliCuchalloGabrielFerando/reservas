@@ -26,10 +26,12 @@ class GestionarFacultadC extends Component
     public $universidadNombre;
     public $universidad;
     public $elId;
+
     public function mount(){
         $this->universidad = universidad::where('id','=',1)->first();
         $this->universidadNombre = $this->universidad->nombre;
     }
+
     public function render()
     {
         return view('livewire.gestionar_facultad_c',

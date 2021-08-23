@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminRole;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,12 +71,12 @@ ROute::get('/ver',function (){
     ]);
     return $pdf->stream();
 });
-Route::get('/reporte',\App\Http\Livewire\Pdf::class);
+Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
 
 Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
     ->name('gestionar_modulo_c')->middleware('auth');
 
-Route::get('/gestionar_aula_c/{$elId}',\App\Http\Livewire\GestionarAulaC::class)
+Route::get('/gestionar_aula_c/{id}',\App\Http\Livewire\GestionarAulaC::class)
     ->name('gestionar_aula_c')->middleware('auth');
 
 Route::get('/gestionar_facultad_c',\App\Http\Livewire\GestionarFacultadC::class)

@@ -1,6 +1,6 @@
 <div  x-data="{open: false}">
     <div class=" flex justify-center">
-        <h1 class="text-center text-3xl mt-10 text-base-900 border-1 border-blue-100">Gestión de Módulos</h1>
+        <h1 class="text-center text-3xl mt-10 text-base-900 border-1 border-blue-100">Gestión de Facultades</h1>
     </div>
     @if($otraPagina =="actual")
         <div class="flex space-x-5 mb-3">
@@ -38,7 +38,7 @@
                         <br>
                         <div class="flex justify-between">
                             <button wire:click="irModulo({{$facultad->id}})" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Ver Modulos
+                                Ver Módulos
                             </button>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div x-data="{ open: false }">
@@ -96,7 +96,7 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Codigo</label>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Código</label>
                                     <input wire:model="codigo" type="number" name="codigo" id="codigo" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
