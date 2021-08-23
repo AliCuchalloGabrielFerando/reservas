@@ -112,51 +112,87 @@
     @elseif ($otraPagina == "crear")
         <div class="mt-10 sm:mt-0">
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form wire:submit.prevent="guardarCrear">
+                <form wire:submit.prevent="guardarCrear(document.querySelector('#grupo_id').value)">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                    <input wire:model="crearNombre" type="text" name="first-name" id="first-name" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearNombre" type="text" name="first-name" id="first-name" required autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Usuario</label>
-                                    <input wire:model="crearUsuario" type="text" name="usuario" id="usuario" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearUsuario" required type="text" name="usuario" id="usuario" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-gray-700">Correo</label>
-                                    <input wire:model="crearEmail" type="email" name="email" id="email" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearEmail" required type="email" name="email" id="email" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                                    <input wire:model="crearPass" type="password" name="password" id="password" autocomplete="password" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="crearPass" required type="password" name="password" id="password" autocomplete="password" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
-                                <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Fecha Registro</label>
-                                    <input wire:model="crearFechaR" type="date" name="date" id="date" autocomplete="date" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
-                                </div>
+
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Alta_baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <input wire:model="alta_baja" required type="text" name="alta_baja" id="alta_baja" autocomplete="alta_baja" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
+
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Id de Grupo</label>
-                                    <input wire:model="grupoId" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Grupo de Usuario</label>
+                                    <input wire:model="grupoNombre"
+                                           class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                           type="text" placeholder="Buscar..." >
+                                        <select class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                         name="grupo_id" id="grupo_id" required  wire:click="requerido(document.querySelector('#grupo_id').value)" >
+                                            <option value="" disabled selected >Elija el tipo grupo de usuario</option>
+                                        @foreach($grupos as $grupo)
+                                            <option value="{{$grupo->id}}" >{{$grupo->nombre}} </option>
+                                        @endforeach
+                                        </select>
                                 </div>
+
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de Docente</label>
-                                    <input wire:model="docenteCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Nombre de Docente</label>
+                                    <select class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                            @if ($grupoId == "1") required @else disabled @endif   name="docenteCod" id="docenteCod"
+                                            wire:click="requeridoDocente(document.querySelector('#docenteCod').value)" >
+                                        <option value="" disabled selected >Elija a una persona docente de laboratorio sin usuario</option>
+                                        @foreach($docentes as $docente)
+                                            <option value="{{$docente->ci}}" >{{$docente->nombre}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+
+
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de JefeLab</label>
-                                    <input wire:model="jefeLabCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Nombre de JefeLab</label>
+                                    <select class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                            @if ($grupoId == "2") required @else disabled @endif   name="jefeCod" id="jefeCod"
+                                            wire:click="requeridoJefe(document.querySelector('#jefeCod').value)" >
+                                        <option value="" disabled selected >Elija a una persona jefe de laboratorio sin usuario</option>
+                                        @foreach($jefes as $jefe)
+                                            <option value="{{$jefe->ci}}" >{{$jefe->nombre}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+
+
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Codigo de Auxiliar</label>
-                                    <input wire:model="auxiliarCod" type="text" name="grupoId" id="grupoId" autocomplete="grupoId" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Nombre de Auxiliar</label>
+                                    <select class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                            @if ($grupoId == "3") required @else disabled @endif   name="auxiliarCod" id="auxiliarCod"
+                                            wire:click="requeridoAuxiliar(document.querySelector('#auxiliarCod').value)" >
+                                        <option value="" disabled selected >Elija a una persona auxiliar sin usuario</option>
+                                        @foreach($auxiliares as $auxiliar)
+                                            <option value="{{$auxiliar->ci}}" >{{$auxiliar->nombre}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                             </div>
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

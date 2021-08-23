@@ -11,9 +11,11 @@ use App\Models\User;
 //use Dompdf\Dompdf;
 class Pdfs extends Component
 {
+    public $fecha_inicio;
+    public $fecha_fin;
     public function render()
     {
-        return view('livewire.pdf');
+        return view('livewire.pdfs');
 
     }
     public function descargar(){
@@ -23,10 +25,10 @@ class Pdfs extends Component
         ]);*/
         // Render the HTML as PDF
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('reportenuevo',[
+        $pdf->loadView('reporte',[
            'users' => user::all()
         ]);
-        return $pdf->stream();
+       // return $pdf->stream();
        // $pdf->render();
 /* $pdf->loadView('reporte',[
            'users' => user::all()
@@ -38,5 +40,8 @@ class Pdfs extends Component
        $pdf->save(storage_path('app/public/') . 'reporte.pdf');
 
         return response()->download(storage_path('app/public/') . 'reporte.pdf');
+    }
+    public function ver(){
+        return redirect()->route('ver');
     }
 }
