@@ -14,7 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
+<body class="bg-gray-100 dark:bg-black h-screen antialiased leading-none font-sans">
     <div id="app">
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
@@ -36,6 +36,7 @@
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
                     @endauth
+                    <button class="bg-white dark:bg-red-500" id="switchTheme">tema</button>
                 </div>
 
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
@@ -59,4 +60,23 @@
     </div>
     @livewireScripts
 </body>
+<script>
+    document.getElementById('switchTheme').addEventListener('click', function() {
+        let htmlClasses = document.querySelector('html').classList;
+        if(localStorage.theme == 'dark') {
+            htmlClasses.remove('dark');
+            localStorage.removeItem('theme')
+        } else {
+            htmlClasses.add('dark');
+            localStorage.theme = 'dark';
+        }
+    });
+</script>
+<script>
+    if (localStorage.theme === 'dark' || (!'theme' in localStorage && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.querySelector('html').classList.add('dark')
+    } else if (localStorage.theme === 'dark') {
+        document.querySelector('html').classList.add('dark')
+    }
+</script>
 </html>
