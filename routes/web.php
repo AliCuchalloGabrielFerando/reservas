@@ -61,7 +61,9 @@ Route::get('/repo',function (){
     $pdf->loadView('reportenuevo');
     return $pdf->stream();
 });
-ROute::get('/ver',function (){
+
+Route::get('/ver/{fecha_inicio?}/{fecha_fin?}', [\App\Http\Controllers\ReporteController::class, 'index'])->name('ver');;
+/*Route::get('/ver/{fecha_inicio?}/{fecha_fin?}',function (){
    // return view('reporte',[ 'users' => user::all()]);
     $pdf = App::make('dompdf.wrapper');
    // $pdf->set_protocol(WWW_ROOT);
@@ -69,7 +71,7 @@ ROute::get('/ver',function (){
         'users' => user::all()
     ]);
     return $pdf->stream();
-});
+})->name('ver');*/
 Route::get('/reporte',\App\Http\Livewire\Pdfs::class);
 
 Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)
