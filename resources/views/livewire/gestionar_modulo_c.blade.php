@@ -87,7 +87,7 @@
                 Crear Módulo
             </button>
         </div>
-        <div class="bg-white px-4 py-6 border-t border-gray-200 sm:px-6">
+        <div class="bg-gray-300 dark:bg-gray-900 px-4 py-6 border-t border-gray-200 sm:px-6">
             {{ $modulos->links() }}
         </div>
     @elseif($otraPagina =="crear")
