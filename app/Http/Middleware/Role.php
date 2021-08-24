@@ -20,10 +20,11 @@ class Role
         $grupo = $user->grupo;
         if($grupo->nombre == $grupos){
             return $next($request);
-        }
-        if($grupos == "all"){
-            return $next($request); 
+        }else {
+            if ($grupos == "all") {
+                return $next($request);
+            }
         }
         return redirect()->route('/');
-    }   
+    }
 }

@@ -15,52 +15,60 @@
     @livewireStyles
 </head>
 <body class="bg-gray-100 dark:bg-black h-screen antialiased leading-none font-sans">
-    <div id="app">
-        <header class="bg-blue-900 py-6">
-            <div class="container mx-auto flex justify-between items-center px-6">
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @auth
-                    <x-nav-link href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
+<div id="app">
+    <header class="bg-blue-900 py-6">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                @auth
+                    @if( isset(auth()->user()->jefe_lab_cod))
+                    <x-nav-link href="{{ route('gestionar_usuario_c') }}"
+                                :active="request()->routeIs('gestionar_usuario_c')">
                         {{ __('Gestionar Usuario') }}
                     </x-nav-link>
 
-                        <x-nav-link href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
-                            {{ __('Gestionar Facultad') }}
-                        </x-nav-link>
+                    <x-nav-link href="{{ route('gestionar_facultad_c') }}"
+                                :active="request()->routeIs('gestionar_facultad_c')">
+                        {{ __('Gestionar Facultad') }}
+                    </x-nav-link>
 
+
+                    <x-nav-link href="{{ route('reporte') }}" :active="request()->routeIs('reporte')">
+                        {{ __('Gestionar Reporte') }}
+                    </x-nav-link>
+                    @endif
                     <x-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
 
 
-                    @endauth
-                    <button class="bg-white dark:bg-red-500" id="switchTheme">tema</button>
-                </div>
-                <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
-                    @guest
-                        <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        @endif
-                    @else
-                        <span>{{ Auth::user()->name }}</span>
-
-                        <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline">
-                           {{ __('Logout') }}
-                        </a>
-                    @endguest
-                </nav>
+                @endauth
+                <button class="bg-white dark:bg-red-500" id="switchTheme">tema</button>
             </div>
-        </header>
-        {{$slot}}
-    </div>
-    @livewireScripts
+            <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
+                @guest
+                    <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    @if (Route::has('register'))
+                        <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    @endif
+                @else
+                    <span>{{ Auth::user()->name }}</span>
+
+                    <a href="{{ route('logout') }}"
+                       class="no-underline hover:underline">
+                        {{ __('Logout') }}
+                    </a>
+                @endguest
+            </nav>
+        </div>
+    </header>
+    {{$slot}}
+</div>
+@livewireScripts
 </body>
 <script>
-    document.getElementById('switchTheme').addEventListener('click', function() {
+    document.getElementById('switchTheme').addEventListener('click', function () {
         let htmlClasses = document.querySelector('html').classList;
-        if(localStorage.theme == 'dark') {
+        if (localStorage.theme == 'dark') {
             htmlClasses.remove('dark');
             localStorage.removeItem('theme')
         } else {

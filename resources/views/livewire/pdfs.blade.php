@@ -21,28 +21,30 @@
             </div>
 
             <div class="flex-col justify-center">
-                <div class="flex justify-center items-end">
+                <div class="flex justify-center items-end space-x-1">
 
 
                     <div>
                         <x-label class="flex justify-center" for="fecha_inicio">Fecha inicio</x-label>
-                        <x-input wire:model="fecha_inicio" min="{{\Carbon\Carbon::now()->toDateString()}}"
+                        <x-input wire:model="fecha_inicio" wire:click="$emit('habilitar')"
                                  name="fecha_inicio" id="fecha_inicio" type="date"></x-input>
                     </div>
                     <div>
                         <x-label class="flex justify-center" for="fecha_fin">Fecha fin</x-label>
-                        <x-input wire:model="fecha_fin" name="fecha_fin" id="fecha_fin" type="date"></x-input>
+                        <x-input wire:model="fecha_fin" wire:click="$emit('habilitar')"
+                                 name="fecha_fin" id="fecha_fin" type="date"></x-input>
                     </div>
                 </div>
 
             </div>
-            <div class="flex justify-center space-x-3">
+            <div  @if(!$bandera) class="invisible flex justify-center space-x-3" @endif class="flex justify-center space-x-3">
                 <button wire:click="descargar"  type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Descargar
                 </button>
-                <a href="{{route('ver',['fecha_inicio'=>$fecha_inicio,'fecha_fin'=>$fecha_fin])}}" target="_blank" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <a href="{{route('ver',['fecha_inicio'=>$fecha_i,'fecha_fin'=>$fecha_f])}}" target="_blank"  hidden  class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Ver
                 </a>
+
             </div>
 
 

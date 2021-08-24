@@ -1,4 +1,4 @@
-<div  x-data="{open: false}">
+<div x-data="{open: false}">
     <div class=" flex justify-center">
         <h1 class="text-center text-3xl mt-10 text-base-900 border-1 border-blue-100">Gestión de Facultades</h1>
     </div>
@@ -16,7 +16,8 @@
                 <option value="10"> 10 por página</option>
             </select>
             @if($search !== '')
-                <button wire:click ="clear" class="form-input rounded-md shadow-sm mt-1 block outline-none text-gray-500">
+                <button wire:click="clear"
+                        class="form-input rounded-md shadow-sm mt-1 block outline-none text-gray-500">
                     X
                 </button>
             @endif
@@ -25,19 +26,24 @@
 
             @foreach($facultades as $facultad)
                 <div class="flex-shrink-0 mx-6 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg">
-                    <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;">
-                        <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white"/>
+                    <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                         style="transform: scale(1.5); opacity: 0.1;">
+                        <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)"
+                              fill="white"/>
                         <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white"/>
                     </svg>
                     <div class="relative pt-10 px-10 flex items-center justify-center">
-                        <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3" style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;"></div>
-                        <img class="relative w-40" src="https://img.europapress.es/fotoweb/fotonoticia_20170907105729_1024.jpg" alt="">
+                        <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                             style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;"></div>
+                        <img class="relative w-40"
+                             src="https://img.europapress.es/fotoweb/fotonoticia_20170907105729_1024.jpg" alt="">
                     </div>
                     <div class="relative text-white px-6 pb-6 mt-6">
                         <span class="block font-semibold text-xl">Facultad {{$facultad->codigo}}</span>
                         <br>
                         <div class="flex justify-between">
-                            <button wire:click="irModulo({{$facultad->id}})" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button wire:click="irModulo({{$facultad->id}})" type="button"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Ver Módulos
                             </button>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -79,10 +85,17 @@
             @endforeach
         </div>
         <div class="flex justify-end">
+
+            <div class="flex flex flex-grow justify-start content-start ml-8">
+                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                    son: {{$contador_pagina_facultad_vista->visitas}}</p>
+            </div>
             <button wire:click="crear" type="button"
                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Crear Facultad
             </button>
+
+
         </div>
         <div class="bg-white px-4 py-6 border-t border-gray-200 sm:px-6">
             {{ $facultades->links() }}
@@ -96,31 +109,49 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Código</label>
-                                    <input wire:model="codigo" type="number" name="codigo" id="codigo" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="first-name"
+                                           class="block text-sm font-medium text-gray-700">Código</label>
+                                    <input wire:model="codigo" type="number" name="codigo" id="codigo"
+                                           autocomplete="name"
+                                           class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                    <input wire:model="nombre" type="string" name="nombre" id="nombre" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="last-name"
+                                           class="block text-sm font-medium text-gray-700">Nombre</label>
+                                    <input wire:model="nombre" type="string" name="nombre" id="nombre"
+                                           autocomplete="user"
+                                           class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Abreviatura</label>
-                                    <input wire:model="abreviatura" type="string" name="abreviatura" id="abreviatura" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="last-name"
+                                           class="block text-sm font-medium text-gray-700">Abreviatura</label>
+                                    <input wire:model="abreviatura" type="string" name="abreviatura" id="abreviatura"
+                                           autocomplete="user"
+                                           class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre de Universidad</label>
-                                    <input wire:model="universidadNombre" type="string" name="universidadNombre" id="universidadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre de
+                                        Universidad</label>
+                                    <input wire:model="universidadNombre" type="string" name="universidadNombre"
+                                           id="universidadNombre" readonly autocomplete="user"
+                                           class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
                                 </div>
                             </div>
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button type="submit"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Guardar
                             </button>
-                            <button wire:click="cancelar" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button wire:click="cancelar" type="button"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Cancelar
                             </button>
+                            <div class="flex flex flex-grow justify-start content-start ml-8">
+                                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                                    son: {{$contador_pagina_facultad_crear->visitas}}</p>
+                            </div>
                         </div>
                     </div>
                 </form>

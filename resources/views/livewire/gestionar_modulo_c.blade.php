@@ -60,6 +60,10 @@
             @endforeach
         </div>
         <div class="flex justify-end">
+            <div class="flex flex flex-grow justify-start content-start ml-8">
+                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                    son: {{$contador_pagina_modulo_vista->visitas}}</p>
+            </div>
             <button wire:click="crear" type="button"
                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Crear Módulo
@@ -93,6 +97,10 @@
                         <button wire:click="cancelar" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Cancelar
                         </button>
+                        <div class="flex flex flex-grow justify-start content-start ml-8">
+                            <p class="text-sm text-gray-500"> las visitas a esta pagina
+                                son: {{$contador_pagina_modulo_crear->visitas}}</p>
+                        </div>
                     </div>
                 </div>
             </form>

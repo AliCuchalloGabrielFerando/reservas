@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\contador_pagina;
 use App\Models\facultad;
 use App\Models\modulo;
 use App\Models\universidad;
@@ -26,10 +27,37 @@ class GestionarFacultadC extends Component
     public $universidadNombre;
     public $universidad;
     public $elId;
+    public $contador_pagina_facultad_vista;
+    public $contador_pagina_facultad_crear;
+    public $contador_pagina_facultad_editar;
 
     public function mount(){
         $this->universidad = universidad::where('id','=',1)->first();
         $this->universidadNombre = $this->universidad->nombre;
+        $this->contador_pagina_facultad_crear = contador_pagina::where('nombre','=','facultad_crear')->first();
+        $this->contador_pagina_facultad_vista = contador_pagina::where('nombre','=','facultad_vista')->first();
+        $this->contador_pagina_facultad_editar = contador_pagina::where('nombre','=','facultad_editas')->first();
+        if(!isset($this->contador_pagina_facultad_crear)){
+            $this->contador_pagina_facultad_crear = contador_pagina::create([
+                "nombre"=>"facultad_crear",
+                "visitas"=>0
+            ]);
+        }
+        if(!isset($this->contador_pagina_facultad_vista)){
+            $this->contador_pagina_facultad_vista =  contador_pagina::create([
+                "nombre"=>"facultad_vista",
+                "visitas"=>1
+            ]);
+        }else{
+            $this->contador_pagina_facultad_vista->visitas++;
+            $this->contador_pagina_facultad_vista->save();
+        }
+        if(!isset($this->contador_pagina_facultad_editar)){
+            $this->contador_pagina_facultad_editar = contador_pagina::create([
+                "nombre"=>"facultad_editar",
+                "visitas"=>0
+            ]);
+        }
     }
 
     public function render()
@@ -48,6 +76,8 @@ class GestionarFacultadC extends Component
 
     public function crear(){
         $this->otraPagina="crear";
+        $this->contador_pagina_facultad_crear->visitas++;
+        $this->contador_pagina_facultad_crear->save();
     }
 
     public function crearFacultad(){
@@ -67,5 +97,7 @@ class GestionarFacultadC extends Component
 
     public function cancelar(){
         $this->otraPagina = "actual";
+        $this->contador_pagina_facultad_vista->visitas++;
+        $this->contador_pagina_facultad_vista->save();
     }
 }
