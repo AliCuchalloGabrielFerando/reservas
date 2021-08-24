@@ -43,6 +43,9 @@
                                         class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-red-500 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Eliminar
                                     </button>
+                                    <a href="{{route('reserva.calendario',['id'=>$aula->id])}}" type="button" class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Ver Aulas
+                                    </a>
                                     <div
                                         x-show="open"
                                         class="z-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">

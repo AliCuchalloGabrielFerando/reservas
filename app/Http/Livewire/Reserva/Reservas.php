@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Reservas extends Component
 {
-    public $aulas;
+    public $reservas;
     public $buscar;
 
     public function render()
@@ -27,12 +27,11 @@ class Reservas extends Component
             ->get();
         dd($reservas);*/
 
-        $this->aulas=aula::select('aula.*')
-            ->join('reserva_aula','aula_id','=','aula.id')
-            ->join('reserva','reserva_id','=','reserva.id')
+        $this->reservas=reserva::select('reserva.*','nombre','aula.codigo_aula')
+            ->join('reserva_aula','reserva_id','=','reserva.id')
+            ->join('aula','aula_id','=','aula.id')
             ->join('estado','estado_id','=','estado.id')
             ->whereDate('reserva.fecha_fin','>=',$date)
-            ->where('estado.nombre','Aceptado')
             ->distinct()
             ->get();
 

@@ -56,15 +56,16 @@ class CrearReserva extends Component
     public $mensaje;
 
     public $contador_pagina_reserva_crear;
+
     public function mount($id = null)
     {
-        $this->contador_pagina_reserva_crear = contador_pagina::where('nombre','=','reserva_crear')->first();
-        if(!isset($this->contador_pagina_reserva_crear)){
-            $this->contador_pagina_reserva_crear =  contador_pagina::create([
-                "nombre"=>"reserva_crear",
-                "visitas"=>1
+        $this->contador_pagina_reserva_crear = contador_pagina::where('nombre', '=', 'reserva_crear')->first();
+        if (!isset($this->contador_pagina_reserva_crear)) {
+            $this->contador_pagina_reserva_crear = contador_pagina::create([
+                "nombre" => "reserva_crear",
+                "visitas" => 1
             ]);
-        }else{
+        } else {
             $this->contador_pagina_reserva_crear->visitas++;
             $this->contador_pagina_reserva_crear->save();
         }
@@ -143,7 +144,7 @@ class CrearReserva extends Component
                 $this->grupo = 0;
             }
         }
-        $this->mensaje='';
+        $this->mensaje = '';
     }
 
     public function render()
@@ -160,61 +161,67 @@ class CrearReserva extends Component
             $dates = collect([]);
             foreach ($this->dias_reservados as $dia_reservado) {
                 $dias = explode("-", $dia_reservado['dias']);
+
                 $dates->push($this->obtenerFechas($dias));
             }
 
+            if ($dates->isEmpty()) {
+                return;
+            } else {
 
-            $gestion = gestion_academica::latest('created_at')->first();
+
+                $gestion = gestion_academica::latest('created_at')->first();
 
 
-            $materia_grupo = materia_grupom::where('materia_id', $this->materia)
-                ->where('grupom_id', $this->grupo)->first();
+                $materia_grupo = materia_grupom::where('materia_id', $this->materia)
+                    ->where('grupom_id', $this->grupo)->first();
 
-            if ($this->reserva_actual == null) {
-                $this->reserva_actual = new reserva();
+                if ($this->reserva_actual == null) {
+                    $this->reserva_actual = new reserva();
+                }
+
+                $this->reserva_actual->actividad = $this->actividad;
+                $this->reserva_actual->fecha_inicio = $this->fecha_inicio;
+                $this->reserva_actual->fecha_fin = $this->fecha_fin;
+
+                $this->reserva_actual->estado_id = $this->estado;
+                $this->reserva_actual->prioridad_id = $this->prioridad;
+                $this->reserva_actual->materia_grupom_id = $materia_grupo == null ? null : $materia_grupo->id;
+                $this->reserva_actual->gestion_academica_id = $gestion->id;
+                $this->reserva_actual->persona_ci = $this->beneficiario;
+                $this->reserva_actual->jefe_lab_cod = Auth::user()->id;
+
+                $this->reserva_actual->save();
+
+                reserva_aula::where('reserva_id', $this->reserva_actual->id)->delete();
+
+
+                foreach ($this->dias_reservados as $key => $dia_reservado) {
+
+                    reserva_aula::create([
+                        //'dias' => $dia_reservado['dias'],
+                        'dias' => $dates[$key]->toJson(),
+                        'hora_inicio' => $dia_reservado['hora_inicio'],
+                        'hora_fin' => $dia_reservado['hora_fin'],
+                        'reserva_id' => $this->reserva_actual->id,
+                        'aula_id' => $this->laboratorio,
+                    ]);
+                }
+
+
+                DB::commit();
+                return redirect()->to('/reservas');
             }
-
-            $this->reserva_actual->actividad = $this->actividad;
-            $this->reserva_actual->fecha_inicio = $this->fecha_inicio;
-            $this->reserva_actual->fecha_fin = $this->fecha_fin;
-
-            $this->reserva_actual->estado_id = $this->estado;
-            $this->reserva_actual->prioridad_id = $this->prioridad;
-            $this->reserva_actual->materia_grupom_id = $materia_grupo == null ? null : $materia_grupo->id;
-            $this->reserva_actual->gestion_academica_id = $gestion->id;
-            $this->reserva_actual->persona_ci = $this->beneficiario;
-            $this->reserva_actual->jefe_lab_cod = Auth::user()->id;
-
-            $this->reserva_actual->save();
-
-            reserva_aula::where('reserva_id', $this->reserva_actual->id)->delete();
-
-
-            foreach ($this->dias_reservados as $key => $dia_reservado) {
-
-                reserva_aula::create([
-                    //'dias' => $dia_reservado['dias'],
-                    'dias' => $dates[$key]->toJson(),
-                    'hora_inicio' => $dia_reservado['hora_inicio'],
-                    'hora_fin' => $dia_reservado['hora_fin'],
-                    'reserva_id' => $this->reserva_actual->id,
-                    'aula_id' => $this->laboratorio,
-                ]);
-            }
-
-
-            DB::commit();
-            return $this->redirect('reservas');
-        } catch (\Exception $e) {
+        } catch
+        (\Exception $e) {
             dd($e);
             DB::rollback();
         }
-
     }
 
     public function agregarDias()
     {
-        if ($this->verificarDisponiblidad()) {
+       if ($this->verificarDisponiblidad()) {
             $d = '';
             foreach ($this->dias as $dia) {
                 $d = $d == '' ? $dia : $d . '-' . $dia;
@@ -222,7 +229,7 @@ class CrearReserva extends Component
             $this->dias_reservados->push(['hora_inicio' => $this->hora_inicio, 'hora_fin' => $this->hora_fin, 'dias' => $d]);
             $this->modal = false;
         } else {
-            $this->mensaje='Ese horario ya esta reservado';
+            $this->mensaje = 'Ese horario ya esta reservado o es inválido';
         }
     }
 
@@ -234,29 +241,32 @@ class CrearReserva extends Component
     public function verificarDisponiblidad()
     {
         $dates = $this->obtenerFechas($this->dias);
+        if ($dates->isEmpty()) {
+            return false;
+        }
         foreach ($dates as $date) {
             $reserva = reserva::join('reserva_aula', 'reserva_id', '=', 'reserva.id')
                 ->where(function ($query) use ($date) {
                     $query->whereJsonContains('dias', $date)
                         ->where('hora_inicio', '>', $this->hora_inicio)
                         ->where('hora_inicio', '<', $this->hora_fin);
-                    if (!$this->crear){
-                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                    if (!$this->crear) {
+                        $query->where('reserva.id', '!=', $this->reserva_actual->id);
                     }
                 })
                 ->orWhere(function ($query) use ($date) {
                     $query->whereJsonContains('dias', $date)
                         ->where('hora_fin', '>', $this->hora_inicio)
                         ->where('hora_fin', '<', $this->hora_fin);
-                    if (!$this->crear){
-                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                    if (!$this->crear) {
+                        $query->where('reserva.id', '!=', $this->reserva_actual->id);
                     }
                 })->orWhere(function ($query) use ($date) {
                     $query->whereJsonContains('dias', $date)
-                        ->where('hora_inicio','<=', $this->hora_inicio)
-                        ->where('hora_fin','>=', $this->hora_fin);
-                    if (!$this->crear){
-                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                        ->where('hora_inicio', '<=', $this->hora_inicio)
+                        ->where('hora_fin', '>=', $this->hora_fin);
+                    if (!$this->crear) {
+                        $query->where('reserva.id', '!=', $this->reserva_actual->id);
                     }
                 })->get();
             if ($reserva == null || $reserva->isNotEmpty()) {

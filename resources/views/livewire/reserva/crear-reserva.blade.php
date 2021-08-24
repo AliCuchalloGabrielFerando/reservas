@@ -8,7 +8,7 @@
 
         <div class="col-span-2">
             <x-label for="beneficiario">Beneficiario</x-label>
-            <x-selector wire:model="persona" name="beneficiario" id="beneficiario" type="text">
+            <x-selector wire:model="persona" name="beneficiario" id="beneficiario" type="text" required>
                 @foreach($personas as $per)
                     <option value="{{$per->ci}}">{{$per->nombre}}</option>
                 @endforeach
@@ -19,7 +19,7 @@
 
         <div>
             <x-label for="prioridad">Prioridad</x-label>
-            <x-selector wire:model="prioridad" name="prioridad" id="prioridad">
+            <x-selector wire:model="prioridad" name="prioridad" id="prioridad" required>
                 @foreach($prioridades as $pri)
                     <option value="{{$pri->id}}">{{$pri->nombre}}</option>
                 @endforeach
@@ -28,7 +28,7 @@
        {{-- @if(!$crear)--}}
         <div>
             <x-label for="estado">Estado</x-label>
-            <x-selector wire:model="estado" name="estado" id="estado">
+            <x-selector wire:model="estado" name="estado" id="estado" required>
                 @foreach($estados as $est)
                     <option value="{{$est->id}}">{{$est->nombre}}</option>
                 @endforeach
@@ -38,7 +38,7 @@
 
         <div>
             <x-label for="sigla">Materia</x-label>
-            <x-selector wire:model="materia" name="sigla" id="sigla">
+            <x-selector wire:model="materia" name="sigla" id="sigla" required>
                 <option value="0">Ninguna</option>
             @foreach($materias as $mat)
                     <option value="{{$mat->id}}">{{$mat->nombre}}</option>
@@ -48,7 +48,7 @@
 
         <div>
             <x-label for="grupo">Grupo</x-label>
-            <x-selector wire:model="grupo" name="grupo" id="grupo">
+            <x-selector wire:model="grupo" name="grupo" id="grupo" required>
                 <option value="0">Ninguno</option>
                 @foreach($grupos as $gru)
                     <option value="{{$gru->id}}">{{$gru->nombre}}</option>
@@ -59,7 +59,7 @@
 
         <div>
             <x-label for="laboratorio">Laboratorio</x-label>
-            <x-selector wire:model="laboratorio" name="laboratorio" id="laboratorio">
+            <x-selector wire:model="laboratorio" name="laboratorio" id="laboratorio" required>
                 @foreach($laboratorios as $lab)
                     <option value="{{$lab->id}}">{{$lab->codigo_aula}}</option>
                 @endforeach
@@ -67,16 +67,18 @@
         </div>
         <div>
             <x-label for="fecha_inicio">Fecha inicio</x-label>
-            <x-input wire:model="fecha_inicio" min="{{\Carbon\Carbon::now()->toDateString()}}" name="fecha_inicio" id="fecha_inicio" type="date"></x-input>
+            <x-input wire:model="fecha_inicio" min="{{\Carbon\Carbon::now()->toDateString()}}" name="fecha_inicio" id="fecha_inicio" type="date" required></x-input>
         </div>
+        @if($fecha_inicio!=null)
         <div>
             <x-label for="fecha_fin">Fecha fin</x-label>
-            <x-input wire:model="fecha_fin" min="{{\Carbon\Carbon::now()->toDateString()}}"  name="fecha_fin" id="fecha_fin" type="date"></x-input>
+            <x-input wire:model="fecha_fin" min="{{$fecha_inicio}}"  name="fecha_fin" id="fecha_fin" type="date" required></x-input>
         </div>
+        @endif
 
         <div class="col-span-full">
             <x-label for="actividad">Actividad</x-label>
-            <x-text-area wire:model="actividad" name="actividad" id="actividad"></x-text-area>
+            <x-text-area wire:model="actividad" name="actividad" id="actividad" required></x-text-area>
         </div>
         <div class="flex justify-center col-span-full">
             <x-button> {{$crear?'Reservar':'Guardar'}}</x-button>
@@ -151,7 +153,7 @@
 
                     <div>
                         <x-label for="hora_fin">Hora fin</x-label>
-                        <x-input wire:model="hora_fin" name="hora_fin" id="hora_fin" type="time" step="900" required></x-input>
+                        <x-input wire:model="hora_fin" name="hora_fin" min="{{$hora_inicio}}" id="hora_fin" type="time" step="900" required></x-input>
                     </div>
                 </div>
                 <div class="flex justify-center">
