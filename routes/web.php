@@ -225,32 +225,32 @@ Route::get('/carga',function(){
     "fechaR"=>"2021-07-22"
   ]);
   $persona1 = persona::create([
-    "ci"=>"5574491",
+    "ci"=>"8874491",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
     "nombre"=>"ali"
   ]);
   $persona2 = persona::create([
-    "ci"=>"4475691",
+    "ci"=>"8874492",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
     "nombre"=>"miranda"
   ]);
   $persona3 = persona::create([
-    "ci"=>"9975591",
+    "ci"=>"8874493",
     "apellidoM"=>"materno",
     "apellidoP"=>"paterno",
     "nombre"=>"rafael"
   ]);
   $docente = docente::create([
       "cod"=>"1",
-      "persona_ci"=>"5574491"
+      "persona_ci"=>"8874491"
   ]);
   $jefe = jefe_lab::create([
     "cod"=>"2",
     "correo"=>"miranda@gmail.com",
     "telefono"=>"751615",
-    "persona_ci"=>"4475691"
+    "persona_ci"=>"8874492"
   ]);
   $tipo_a = tipo_auxiliar::create([
     "alta_baja"=>"nose",
@@ -272,7 +272,7 @@ Route::get('/carga',function(){
     "telefono"=>"54221",
     "numero_formulario"=>"100",
     "cv"=>"100101010",
-    "persona_ci"=>"9975591",
+    "persona_ci"=>"8874492",
     "tipo_auxiliar_id"=>"1"
   ]);
 
@@ -313,19 +313,19 @@ Route::get('/carga',function(){
 });
 Route::get('/personitas',function (){
     $persona3 = persona::create([
-        "ci"=>"7541755",
+        "ci"=>"8874495",
         "apellidoM"=>"materno",
         "apellidoP"=>"paterno",
         "nombre"=>"daniel"
     ]);
     $persona3 = persona::create([
-        "ci"=>"7541758",
+        "ci"=>"8874496",
         "apellidoM"=>"materno",
         "apellidoP"=>"paterno",
         "nombre"=>"oscar"
     ]);
     $persona3 = persona::create([
-        "ci"=>"7541754",
+        "ci"=>"8874497",
         "apellidoM"=>"materno",
         "apellidoP"=>"paterno",
         "nombre"=>"marco"
@@ -335,7 +335,7 @@ Route::get('/personitas',function (){
         "cod"=>"3",
         "correo"=>"miranda@gmail.com",
         "telefono"=>"751615",
-        "persona_ci"=>"7541755"
+        "persona_ci"=>"8874495"
     ]);
 
     $auxiliar = auxiliar::create([
@@ -351,12 +351,12 @@ Route::get('/personitas',function (){
         "telefono"=>"54221",
         "numero_formulario"=>"100",
         "cv"=>"100101010",
-        "persona_ci"=>"7541758",
+        "persona_ci"=>"8874496",
         "tipo_auxiliar_id"=>"1"
     ]);
     $docente = docente::create([
         "cod"=>"2",
-        "persona_ci"=>"7541754"
+        "persona_ci"=>"8874497"
     ]);
     return "vamoss";
 });
