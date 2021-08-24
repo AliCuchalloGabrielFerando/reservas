@@ -46,6 +46,10 @@
                 </a>
 
             </div>
+        <div class="flex flex flex-grow justify-start content-start ml-8">
+            <p class="text-sm text-gray-500"> las visitas a esta pagina
+                son: {{$contador_pagina_reporte_vista->visitas}}</p>
+        </div>
 
 
 

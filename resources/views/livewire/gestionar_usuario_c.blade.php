@@ -46,6 +46,9 @@
                                     <th scope="col" class="relative px-5 py-3">
                                         <span class="sr-only">Editar</span>
                                     </th>
+                                    <th scope="col" class="relative px-5 py-3">
+                                        <span class="sr-only">Editar</span>
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
