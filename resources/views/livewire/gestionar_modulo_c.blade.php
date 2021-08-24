@@ -79,7 +79,7 @@
         </div>
         <div class="dark:text-white flex justify-end">
             <div class="flex flex flex-grow justify-start content-start ml-8">
-                <p class="text-sm text-gray-500"> las visitas a esta pagina
+                <p class="text-sm text-black dark:text-white"> Las visitas a esta página
                     son: {{$contador_pagina_modulo_vista->visitas}}</p>
             </div>
             <button wire:click="crear" type="button"
