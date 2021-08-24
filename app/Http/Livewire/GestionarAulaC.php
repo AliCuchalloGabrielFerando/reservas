@@ -11,7 +11,11 @@ use Livewire\Component;
 class GestionarAulaC extends Component
 {
     use WithPagination;
-    public $buscar="";
+    public $search="";
+    protected $queryString = [
+        'search'=>['except'=>''],
+        'nrosPagina'=>['except'=>'']
+    ];
     public $nrosPagina="3";
     public $otraPagina="actual";
     public $usuario;
@@ -36,7 +40,7 @@ class GestionarAulaC extends Component
     public function render()
     {
         return view('livewire.gestionar_aula_c',
-            ['aulas'=>aula::where('codigo_aula','like',"%{$this->buscar}%")
+            ['aulas'=>aula::where('codigo_aula','like',"%{$this->search}%")
                 ->where('modulo_id','=',$this->moduloId)
                 ->paginate($this->nrosPagina)]);
     }

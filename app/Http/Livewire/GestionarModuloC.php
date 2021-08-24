@@ -10,7 +10,11 @@ use Livewire\Component;
 class GestionarModuloC extends Component
 {
     use WithPagination;
-    public $buscar="";
+    public $search="";
+    protected $queryString = [
+        'search'=>['except'=>''],
+        'nrosPagina'=>['except'=>'']
+    ];
     public $nrosPagina="3";
     public $otraPagina="actual";
     public $numero;
@@ -29,7 +33,7 @@ class GestionarModuloC extends Component
     public function render()
     {
         return view('livewire.gestionar_modulo_c',
-            ['modulos'=>modulo::where('nro','like',"%{$this->buscar}%")
+            ['modulos'=>modulo::where('nro','like',"%{$this->search}%")
                 ->where('facultad_id','=',$this->facuID)
                 ->paginate($this->nrosPagina)]);
     }

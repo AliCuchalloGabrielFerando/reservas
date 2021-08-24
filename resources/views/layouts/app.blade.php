@@ -14,27 +14,28 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
-<body class="bg-gray-100 dark:bg-black h-screen antialiased leading-none font-sans">
+<body class="bg-gray-300 dark:bg-gray-900 h-screen antialiased leading-none font-sans">
     <div id="app">
-        <header class="bg-blue-900 py-6">
+        <header class="dark:bg-blue-200 bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
-                    <x-nav-link href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
+                    <x-nav-link class="text-white dark:text-black" href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
                         {{ __('Gestionar Usuario') }}
                     </x-nav-link>
 
-                        <x-nav-link href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
+                        <x-nav-link class="text-white dark:text-black" href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
                             {{ __('Gestionar Facultad') }}
                         </x-nav-link>
 
-                    <x-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
+                    <x-nav-link class="text-white dark:text-black" href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
 
-
                     @endauth
-                    <button class="bg-white dark:bg-red-500" id="switchTheme">tema</button>
+                    <button class="text-white dark:text-black" id="switchTheme">
+                        {{ __('Tema') }}
+                    </button>
                 </div>
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     @guest
@@ -43,10 +44,10 @@
                             <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <span>{{ Auth::user()->name }}</span>
+                        <span class="text-white dark:text-black">{{ Auth::user()->name }}</span>
 
                         <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline">
+                           class="text-white dark:text-black no-underline hover:underline">
                            {{ __('Logout') }}
                         </a>
                     @endguest
