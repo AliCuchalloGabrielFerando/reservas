@@ -218,7 +218,7 @@ class GestionarUsuarioC extends Component
         $usuarioGuardar->password = Hash::make($this->crearPass);
         $usuarioGuardar->usuario = $this->crearUsuario;
         $usuarioGuardar->alta_baja = $this->alta_baja;
-        $usuarioGuardar->fechaR = Carbon::now()->format('y-m-d');
+        $usuarioGuardar->fechaR = Carbon::now()->format('Y-m-d');
         $usuarioGuardar->grupo_id = $grupo_id;
 
         $tipo_usuario="";
