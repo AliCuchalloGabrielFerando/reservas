@@ -21,17 +21,16 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
                         @if( isset(auth()->user()->jefe_lab_cod))
-                    <x-nav-link class="text-white dark:text-black" href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
+                    <x-nav-link href="{{ route('gestionar_usuario_c') }}" :active="request()->routeIs('gestionar_usuario_c')">
                         {{ __('Gestionar Usuario') }}
                     </x-nav-link>
 
-                        <x-nav-link class="text-white dark:text-black" href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
+                        <x-nav-link href="{{ route('gestionar_facultad_c') }}" :active="request()->routeIs('gestionar_facultad_c')">
                             {{ __('Gestionar Facultad') }}
                         </x-nav-link>
-
-                            <x-nav-link href="{{ route('reporte') }}" :active="request()->routeIs('reporte')">
+                        <x-nav-link href="{{ route('reporte') }}" :active="request()->routeIs('reporte')">
                                 {{ __('Gestionar Reporte') }}
-                            </x-nav-link>
+                        </x-nav-link>
                         @endif
                     <x-nav-link class="text-white dark:text-black" href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
