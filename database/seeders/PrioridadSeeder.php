@@ -14,13 +14,13 @@ class PrioridadSeeder extends Seeder
      */
     public function run()
     {
-        Prioridad::create([
+        Prioridad::create([     #id = 1
             'nombre'=>'Alta'
         ]);
-        Prioridad::create([
+        Prioridad::create([     #id = 2
             'nombre'=>'Media'
         ]);
-        Prioridad::create([
+        Prioridad::create([     #id = 3
             'nombre'=>'Baja'
         ]);
     }

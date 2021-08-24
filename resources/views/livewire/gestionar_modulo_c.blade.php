@@ -83,7 +83,7 @@
                     son: {{$contador_pagina_modulo_vista->visitas}}</p>
             </div>
             <button wire:click="crear" type="button"
-                    class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    class="text-white dark:text-black bg-indigo-900 dark:bg-blue-300 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Crear Módulo
             </button>
         </div>
@@ -96,27 +96,27 @@
             <form wire:submit.prevent="crearModulo">
                 @csrf
                 <div class="shadow overflow-hidden sm:rounded-md">
-                    <div class="px-4 py-5 bg-white sm:p-6">
+                    <div class="px-4 py-5 bg-gray-100 dark:bg-gray-900 sm:p-6">
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="first-name" class="block text-sm font-medium text-gray-700">Número</label>
-                                <input wire:model="numero" type="number" name="numero" id="numero" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                <label for="first-name" class="block text-sm font-medium text-black dark:text-white">Número</label>
+                                <input wire:model="numero" type="number" name="numero" id="numero" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="last-name" class="block text-sm font-medium text-gray-700">Nombre de Facultad</label>
-                                <input wire:model="facultadNombre" type="text" name="facultadNombre" id="facultadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300">
+                                <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre de Facultad</label>
+                                <input wire:model="facultadNombre" type="text" name="facultadNombre" id="facultadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                             </div>
                         </div>
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button type="submit" class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button type="submit" class="text-white dark:text-black bg-indigo-900 dark:bg-blue-300 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Guardar
                         </button>
-                        <button wire:click="cancelar" type="button" class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button wire:click="cancelar" type="button" class="text-white dark:text-black bg-indigo-900 dark:bg-blue-300 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Cancelar
                         </button>
                         <div class="flex flex flex-grow justify-start content-start ml-8">
-                            <p class="text-sm text-gray-500"> las visitas a esta pagina
+                            <p class="text-sm text-black ">Las visitas a esta página
                                 son: {{$contador_pagina_modulo_crear->visitas}}</p>
                         </div>
                     </div>

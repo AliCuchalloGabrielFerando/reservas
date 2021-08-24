@@ -14,11 +14,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            UniversidadSeeder::class,
+            FacultadSeeder::class,
+            ModuloSeeder::class,
+            CarreraSeeder::class,
+            MateriaSeeder::class,
+            GrupoMSeeder::class,
+            MateriaGrupoMSeeder::class,
             GestionSeeder::class,
+            GrupoSeeder::class,
+            PersonaSeeder::class,
+            JefeLabSeeder::class,
+            DocenteSeeder::class,
+            TipoAuxiliarSeeder::class,
+            AuxiliarSeeder::class,
+            UserSeeder::class,
+            TipoAulaSeeder::class,
+            AulaSeeder::class,
             EstadoSeeder::class,
             PrioridadSeeder::class,
-            AulaSeeder::class
+            ReservaSeeder::class,
+            ReservaAulaSeeder::class
         ]);
-        // \App\Models\User::factory(10)->create();
     }
 }

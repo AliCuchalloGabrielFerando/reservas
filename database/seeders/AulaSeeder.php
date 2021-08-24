@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\aula;
-use App\Models\tipo_aula;
 use Illuminate\Database\Seeder;
 
 class AulaSeeder extends Seeder
@@ -15,72 +14,68 @@ class AulaSeeder extends Seeder
      */
     public function run()
     {
-        tipo_aula::create([
-            'nombre'=>'cualquiera'
-        ]);
-
-        aula::create([
-            'alta_baja'=>'nose',
+        aula::create([      #id = 1
+            'alta_baja'=>'true',
             'capacidad'=>30,
             'codigo_aula'=>41,
-            'descripcion_de_ubicacion'=>'lo que sea',
+            'descripcion_de_ubicacion'=>'Sala 41 de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
-            'tipo_aula_id'=>1,
+            'usuario'=>'rafael',
+            'tipo_aula_id'=>3,
             'modulo_id'=>1,
         ]);
 
-        aula::create([
-            'alta_baja'=>'nose',
-            'capacidad'=>30,
+        aula::create([      #id = 2
+            'alta_baja'=>'true',
+            'capacidad'=>35,
             'codigo_aula'=>42,
-            'descripcion_de_ubicacion'=>'lo que sea',
+            'descripcion_de_ubicacion'=>'Sala 42 de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
-            'tipo_aula_id'=>1,
+            'usuario'=>'rafael',
+            'tipo_aula_id'=>3,
             'modulo_id'=>1,
         ]);
 
-        aula::create([
-            'alta_baja'=>'nose',
-            'capacidad'=>30,
-            'codigo_aula'=>43,
-            'descripcion_de_ubicacion'=>'lo que sea',
+        aula::create([      #id = 3
+            'alta_baja'=>'true',
+            'capacidad'=>50,
+            'codigo_aula'=>10,
+            'descripcion_de_ubicacion'=>'Aula 10 de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
-            'tipo_aula_id'=>1,
+            'usuario'=>'ali',
+            'tipo_aula_id'=>2,
             'modulo_id'=>1,
         ]);
 
-        aula::create([
-            'alta_baja'=>'nose',
-            'capacidad'=>30,
-            'codigo_aula'=>44,
-            'descripcion_de_ubicacion'=>'lo que sea',
+        aula::create([      #id = 4
+            'alta_baja'=>'true',
+            'capacidad'=>60,
+            'codigo_aula'=>21,
+            'descripcion_de_ubicacion'=>'Aula 21 de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
-            'tipo_aula_id'=>1,
+            'usuario'=>'ali',
+            'tipo_aula_id'=>2,
             'modulo_id'=>1,
         ]);
 
-        aula::create([
-            'alta_baja'=>'nose',
-            'capacidad'=>30,
-            'codigo_aula'=>45,
-            'descripcion_de_ubicacion'=>'lo que sea',
+        aula::create([      #id = 5
+            'alta_baja'=>'true',
+            'capacidad'=>40,
+            'codigo_aula'=>32,
+            'descripcion_de_ubicacion'=>'Aula 32 de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
-            'tipo_aula_id'=>1,
+            'usuario'=>'ali',
+            'tipo_aula_id'=>2,
             'modulo_id'=>1,
         ]);
 
-        aula::create([
-            'alta_baja'=>'nose',
+        aula::create([      #id = 6
+            'alta_baja'=>'true',
             'capacidad'=>30,
-            'codigo_aula'=>46,
-            'descripcion_de_ubicacion'=>'lo que sea',
+            'codigo_aula'=>150,
+            'descripcion_de_ubicacion'=>'Aula Lab de la FICCT',
             'fechaR'=>'2020-05-05',
-            'usuario'=>'tampoco se',
+            'usuario'=>'sergio',
             'tipo_aula_id'=>1,
             'modulo_id'=>1,
         ]);

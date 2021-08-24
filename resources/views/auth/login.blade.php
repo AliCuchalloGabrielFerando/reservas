@@ -12,7 +12,7 @@
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="flex flex-wrap">
+                    <div class="flex flex-wrap ">
                         <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
                             {{ __('E-Mail Address') }}:
                         </label>
@@ -61,7 +61,7 @@
 
                     <div class="flex justify-center ">
                         <button type="submit"
-                                class="mb-5 w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                                class="mb-5 w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-white dark:text-black bg-indigo-900 dark:bg-blue-300 hover:bg-blue-700 sm:py-4">
                             {{ __('Login') }}
                         </button>
 
@@ -79,7 +79,7 @@
             </section>
         </div>
     </div>
-        <p class="text-center text-gray-500 text-xs">
+        <p class="text-center text-black dark:text-white text-s">
             &copy;2021 Tecnología Web - Grupo11 - SA.
         </p>
 </main>

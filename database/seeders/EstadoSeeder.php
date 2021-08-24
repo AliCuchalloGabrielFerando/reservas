@@ -14,16 +14,16 @@ class EstadoSeeder extends Seeder
      */
     public function run()
     {
-        Estado::create([
+        Estado::create([    #id = 1
             'nombre'=>'Proceso'
         ]);
-        Estado::create([
+        Estado::create([    #id = 2
             'nombre'=>'Aceptado'
         ]);
-        Estado::create([
+        Estado::create([    #id = 3
             'nombre'=>'Cancelado'
         ]);
-        Estado::create([
+        Estado::create([    #id = 4
             'nombre'=>'Finalizado'
         ]);
     }
