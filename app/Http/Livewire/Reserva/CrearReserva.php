@@ -125,7 +125,13 @@ class CrearReserva extends Component
                 ->where('materia_grupom.materia_id', $this->materia)->get();
 
             foreach ($reserva_aula as $r_a) {
-                $this->dias_reservados->push(['hora_inicio' => $r_a->hora_inicio, 'hora_fin' => $r_a->hora_fin, 'dias' => $r_a->dias]);
+                $dias = json_decode($r_a->dias, true);
+                $d='';
+                foreach ($dias as $dia){
+                    $dia=new Carbon($dia);
+                    $d = $d == '' ? $dia->dayName : $d . '-' . $dia->dayName;
+                }
+                $this->dias_reservados->push(['hora_inicio' => $r_a->hora_inicio, 'hora_fin' => $r_a->hora_fin, 'dias' => $d]);
             }
         }
     }

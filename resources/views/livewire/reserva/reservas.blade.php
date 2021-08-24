@@ -1,6 +1,6 @@
-<div class="p-10">
+<div class="p-10 space-x-3 space-y-3">
 <div class="flex justify-center">
-<x-a class="" href="{{route('reserva.crear')}}">
+<x-a  href="{{route('reserva.crear')}}">
     {{'Reservar'}}</x-a>
 </div>
     @foreach($reservas as $reserva)
@@ -23,4 +23,6 @@
             @endif
         </x-a>
     @endforeach
+
+
 </div>
