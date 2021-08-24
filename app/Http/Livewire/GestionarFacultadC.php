@@ -18,7 +18,6 @@ class GestionarFacultadC extends Component
         'search'=>['except'=>''],
         'nrosPagina'=>['except'=>'']
     ];
-    public $buscar="";
     public $nrosPagina="3";
     public $otraPagina="actual";
     public $codigo;
