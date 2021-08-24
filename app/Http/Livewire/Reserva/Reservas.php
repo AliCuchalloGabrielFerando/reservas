@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Reserva;
 
 use App\Models\aula;
+use App\Models\reserva;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -20,10 +21,18 @@ class Reservas extends Component
          * Carbon::now('America/La_Paz')->locale('es')->dayName;
          */
 
-        $this->aulas=aula::select('aula.*','reserva.id as reserva_id')
+/*        $reservas=reserva::
+            join('reserva_aula','reserva_id','=','reserva.id')
+            ->whereJsonContains('reserva_aula.dias', '2021-08-28')
+            ->get();
+        dd($reservas);*/
+
+        $this->aulas=aula::select('aula.*')
             ->join('reserva_aula','aula_id','=','aula.id')
             ->join('reserva','reserva_id','=','reserva.id')
+            ->join('estado','estado_id','=','estado.id')
             ->whereDate('reserva.fecha_fin','>=',$date)
+            ->where('estado.nombre','Aceptado')
             ->distinct()
             ->get();
 

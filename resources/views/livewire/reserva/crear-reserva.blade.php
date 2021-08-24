@@ -80,7 +80,10 @@
     </form>
 
     <div class="flex justify-center">
-    <x-button wire:click="$toggle('modal')">Agregar días</x-button>
+        @if($fecha_inicio!=null && $fecha_fin!=null)
+        <x-button wire:click="$toggle('modal')">Agregar días</x-button>
+        @endif
+
     </div>
 
     <div class="flex justify-center p-5">
@@ -89,7 +92,7 @@
             <p class="text-xl font-semibold">{{$dia_reservado['hora_inicio'].' - '.$dia_reservado['hora_fin'] }}</p>
             <span>{{$dia_reservado['dias']}}</span>
             <div>
-            <x-button wire:click="eliminarDia({{$key}})">Eliminar</x-button>
+            <x-danger-button wire:click="eliminarDia({{$key}})">Eliminar</x-danger-button>
             </div>
         </div>
     @endforeach
@@ -102,34 +105,37 @@
         </x-slot>
 
         <x-slot name="content">
+            @if($mensaje!==null || $mensaje!='')
+                <p class="text-center text-red-500">{{$mensaje}}</p>
+            @endif
             <form class="space-y-5" wire:submit.prevent="agregarDias">
                 <div class="flex justify-center space-x-10">
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Lu" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="lunes" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Lu</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Ma" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="martes" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Ma</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Mi" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="miércoles" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Mi</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Ju" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="jueves" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Ju</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Vi" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="viernes" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Vi</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Sa" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="sábado" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Sa</x-label>
                     </div>
                     <div class="flex flex-col">
-                        <x-input wire:model="dias" value="Do" name="dias" type="checkbox"></x-input>
+                        <x-input wire:model="dias" value="domingo" name="dias" type="checkbox"></x-input>
                         <x-label for="dias">Do</x-label>
                     </div>
                 </div>

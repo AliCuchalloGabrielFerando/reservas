@@ -18,6 +18,9 @@ class EstadoSeeder extends Seeder
             'nombre'=>'Proceso'
         ]);
         Estado::create([
+            'nombre'=>'Aceptado'
+        ]);
+        Estado::create([
             'nombre'=>'Cancelado'
         ]);
         Estado::create([

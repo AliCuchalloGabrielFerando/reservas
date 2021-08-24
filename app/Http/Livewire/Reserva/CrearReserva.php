@@ -14,6 +14,7 @@ use App\Models\Prioridad;
 use App\Models\reserva;
 use App\Models\reserva_aula;
 use Carbon\Carbon;
+use Carbon\Traits\Creator;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class CrearReserva extends Component
     public $hora_fin;
 
     public $crear;
+    public $mensaje;
 
     public function mount($id = null)
     {
@@ -63,7 +65,7 @@ class CrearReserva extends Component
         $this->prioridades = Prioridad::all();
 
         if ($id == null) {
-            $this->crear=true;
+            $this->crear = true;
             $this->estado = Estado::where('nombre', 'Proceso')->first()->id;
 
             $this->beneficiario = $this->personas->first()->ci;
@@ -78,16 +80,16 @@ class CrearReserva extends Component
             $this->grupo = 0;
 
         } else {
-            $this->crear=false;
+            $this->crear = false;
             $this->reserva_actual = reserva::find($id);
             $this->estado = $this->reserva_actual->estado_id;
             $this->beneficiario = $this->reserva_actual->persona_ci;
             $this->prioridad = $this->reserva_actual->prioridad_id;
 
-            if($this->reserva_actual->materia_grupom_id==null){
+            if ($this->reserva_actual->materia_grupom_id == null) {
                 $this->grupo = 0;
-                $this->materia =0;
-            }else{
+                $this->materia = 0;
+            } else {
                 $materia_grupo = materia_grupom::where('id', $this->reserva_actual->materia_grupom_id)->first();
                 $this->grupo = $materia_grupo->grupom_id;
                 $this->materia = $materia_grupo->materia_id;
@@ -117,49 +119,37 @@ class CrearReserva extends Component
     public function updated($propertyName)
     {
         if ($propertyName == 'materia') {
-            if($this->materia!=0) {
+            if ($this->materia != 0) {
                 $this->grupos = grupom::select('grupom.*')
                     ->join('materia_grupom', 'grupom_id', '=', 'grupom.id')
                     ->where('materia_grupom.materia_id', $this->materia)->get();
 
                 $this->grupo = $this->grupos->first()->id;
-            }else{
-                $this->grupo=0;
+            } else {
+                $this->grupo = 0;
             }
         }
+        $this->mensaje='';
     }
 
     public function render()
     {
-            return view('livewire.reserva.crear-reserva');
+        return view('livewire.reserva.crear-reserva');
     }
 
     public function reservar()
     {
-        /*$begin = new Carbon( $this->fecha_inicio );
-        $end   = new Carbon( $this->fecha_fin );
-        $dates=collect([]);
-        for ($i = $begin; $i <= $end; $i->addDay()) {
-            $dates->push($i->toDateString());
-        }*/
-
-        /*      $d='';
-
-              $reserva_aula=reserva_aula::where('aula_id',$this->laboratorio)
-                  ->join('reserva','reserva.id','=','reserva_aula.reserva_id')
-                  ->where(function($query) {
-                      $query->whereBetween('hora_inicio', [$this->hora_inicio,$this->hora_fin])
-                          ->orWhereBetween('hora_fin', [$this->hora_inicio,$this->hora_fin]);
-                  })
-                  ->where(function($query) {
-                      $query->whereBetween('fecha_inicio', [$this->fecha_inicio,$this->fecha_fin])
-                          ->orWhereBetween('fecha_fin', [$this->fecha_inicio,$this->fecha_fin]);
-                  })
-                  ->get();*/
-
-
         DB::beginTransaction();
         try {
+
+
+            $dates = collect([]);
+            foreach ($this->dias_reservados as $dia_reservado) {
+                $dias = explode("-", $dia_reservado['dias']);
+                $dates->push($this->obtenerFechas($dias));
+            }
+
+
             $gestion = gestion_academica::latest('created_at')->first();
 
 
@@ -176,18 +166,21 @@ class CrearReserva extends Component
 
             $this->reserva_actual->estado_id = $this->estado;
             $this->reserva_actual->prioridad_id = $this->prioridad;
-            $this->reserva_actual->materia_grupom_id = $materia_grupo==null?null:$materia_grupo->id;
+            $this->reserva_actual->materia_grupom_id = $materia_grupo == null ? null : $materia_grupo->id;
             $this->reserva_actual->gestion_academica_id = $gestion->id;
             $this->reserva_actual->persona_ci = $this->beneficiario;
             $this->reserva_actual->jefe_lab_cod = Auth::user()->id;
 
             $this->reserva_actual->save();
 
-            reserva_aula::where('reserva_id',$this->reserva_actual->id)->delete();
+            reserva_aula::where('reserva_id', $this->reserva_actual->id)->delete();
 
-            foreach ($this->dias_reservados as $dia_reservado) {
+
+            foreach ($this->dias_reservados as $key => $dia_reservado) {
+
                 reserva_aula::create([
-                    'dias' => $dia_reservado['dias'],
+                    //'dias' => $dia_reservado['dias'],
+                    'dias' => $dates[$key]->toJson(),
                     'hora_inicio' => $dia_reservado['hora_inicio'],
                     'hora_fin' => $dia_reservado['hora_fin'],
                     'reserva_id' => $this->reserva_actual->id,
@@ -207,16 +200,69 @@ class CrearReserva extends Component
 
     public function agregarDias()
     {
-        $d = '';
-        foreach ($this->dias as $dia) {
-            $d = $d == '' ? $dia : $d . '-' . $dia;
+        if ($this->verificarDisponiblidad()) {
+            $d = '';
+            foreach ($this->dias as $dia) {
+                $d = $d == '' ? $dia : $d . '-' . $dia;
+            }
+            $this->dias_reservados->push(['hora_inicio' => $this->hora_inicio, 'hora_fin' => $this->hora_fin, 'dias' => $d]);
+            $this->modal = false;
+        } else {
+            $this->mensaje='Ese horario ya esta reservado';
         }
-        $this->dias_reservados->push(['hora_inicio' => $this->hora_inicio, 'hora_fin' => $this->hora_fin, 'dias' => $d]);
-        $this->modal = false;
     }
 
-    public function eliminarDia($key){
+    public function eliminarDia($key)
+    {
         $this->dias_reservados->forget($key);
+    }
+
+    public function verificarDisponiblidad()
+    {
+        $dates = $this->obtenerFechas($this->dias);
+        foreach ($dates as $date) {
+            $reserva = reserva::join('reserva_aula', 'reserva_id', '=', 'reserva.id')
+                ->where(function ($query) use ($date) {
+                    $query->whereJsonContains('dias', $date)
+                        ->where('hora_inicio', '>', $this->hora_inicio)
+                        ->where('hora_inicio', '<', $this->hora_fin);
+                    if (!$this->crear){
+                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                    }
+                })
+                ->orWhere(function ($query) use ($date) {
+                    $query->whereJsonContains('dias', $date)
+                        ->where('hora_fin', '>', $this->hora_inicio)
+                        ->where('hora_fin', '<', $this->hora_fin);
+                    if (!$this->crear){
+                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                    }
+                })->orWhere(function ($query) use ($date) {
+                    $query->whereJsonContains('dias', $date)
+                        ->where('hora_inicio','<=', $this->hora_inicio)
+                        ->where('hora_fin','>=', $this->hora_fin);
+                    if (!$this->crear){
+                        $query->where('reserva.id','!=',$this->reserva_actual->id);
+                    }
+                })->get();
+            if ($reserva == null || $reserva->isNotEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function obtenerFechas($dias)
+    {
+        $dates = collect([]);
+        for ($i = new Carbon($this->fecha_inicio); $i <= new Carbon($this->fecha_fin); $i->addDay()) {
+            foreach ($dias as $dia) {
+                if ($dia === $i->dayName) {
+                    $dates->push($i->toDateString());
+                }
+            }
+        }
+        return $dates;
     }
 
 }
