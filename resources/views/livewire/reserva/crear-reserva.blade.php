@@ -25,7 +25,7 @@
                 @endforeach
             </x-selector>
         </div>
-        @if(!$crear)
+       {{-- @if(!$crear)--}}
         <div>
             <x-label for="estado">Estado</x-label>
             <x-selector wire:model="estado" name="estado" id="estado">
@@ -34,7 +34,7 @@
                 @endforeach
             </x-selector>
         </div>
-        @endif
+        {{--@endif--}}
 
         <div>
             <x-label for="sigla">Materia</x-label>
@@ -71,7 +71,7 @@
         </div>
         <div>
             <x-label for="fecha_fin">Fecha fin</x-label>
-            <x-input wire:model="fecha_fin"  name="fecha_fin" id="fecha_fin" type="date"></x-input>
+            <x-input wire:model="fecha_fin" min="{{\Carbon\Carbon::now()->toDateString()}}"  name="fecha_fin" id="fecha_fin" type="date"></x-input>
         </div>
 
         <div class="col-span-full">

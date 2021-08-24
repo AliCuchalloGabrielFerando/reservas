@@ -76,10 +76,11 @@ class CrearReserva extends Component
         $this->materias = materia::all();
         $this->laboratorios = aula::all();
         $this->prioridades = Prioridad::all();
+        $this->estados = Estado::all();
 
         if ($id == null) {
             $this->crear = true;
-            $this->estado = Estado::where('nombre', 'Proceso')->first()->id;
+            $this->estado = $this->estados->first()->id;
 
             $this->beneficiario = $this->personas->first()->ci;
             $this->materia = 0;
