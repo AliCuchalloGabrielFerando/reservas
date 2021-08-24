@@ -162,6 +162,12 @@ class GestionarUsuarioC extends Component
         $this->otraPagina = "actual";
         $this->contador_pagina_usuario_vista->visitas++;
         $this->contador_pagina_usuario_vista->save();
+
+        $this->crearEmail = '';
+        $this->crearFechaR = '';
+        $this->crearNombre = '';
+        $this->crearPass = '';
+        $this->crearUsuario = '';
     }
 
     public function editar()
@@ -233,7 +239,8 @@ class GestionarUsuarioC extends Component
             $tipo_usuario= "auxiliar";
             $this->auxiliarCod = '';
         }
-
+        $usuarioGuardar->email = $this->crearEmail;
+        $usuarioGuardar->save();
         $reporte = new reporte();
         $reporte->tipo_usuario = "jefe de laboratorio";
         $reporte->user_id = auth()->user()->id;
@@ -243,8 +250,7 @@ class GestionarUsuarioC extends Component
         $reporte->fecha = Carbon::now();
         $reporte->save();
 
-        $usuarioGuardar->email = $this->crearEmail;
-        $usuarioGuardar->save();
+
 
 
         $this->crearEmail = '';

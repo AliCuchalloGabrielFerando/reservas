@@ -17,7 +17,7 @@
 
 
 <div style="position: absolute;
-	top: 10%;
+	top: 20%;
 width: 700px;
 	left: 50%;
 	transform: translate(-50%, -50%);">
