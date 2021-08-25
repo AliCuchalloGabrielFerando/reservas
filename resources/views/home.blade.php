@@ -18,7 +18,7 @@
                 </header>
 
                 <div class="w-full p-6">
-                    <p class="text-gray-700">
+                    <p class="text-black">
                         Usted está en el Sistema de Reservas FICCT
                     </p>
                 </div>

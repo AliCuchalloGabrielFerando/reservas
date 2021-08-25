@@ -14,13 +14,21 @@ class GestionSeeder extends Seeder
      */
     public function run()
     {
-        gestion_academica::create([
-            'alta_baja'=>'no se',
+        gestion_academica::create([ #id = 1
+            'alta_baja'=>'true',
             'anio'=>'2021',
-            'estado'=>'lo que sea',
-            'fechaR'=>'2020-05-05',
+            'estado'=>'Activo',
+            'fechaR'=>'2021-03-05',
+            'semestre'=>'1',
+            'usuario'=>'rafael'
+        ]);
+        gestion_academica::create([ #id = 2
+            'alta_baja'=>'true',
+            'anio'=>'2020',
+            'estado'=>'Pasado',
+            'fechaR'=>'2020-08-10',
             'semestre'=>'2',
-            'usuario'=>'lo que sea'
+            'usuario'=>'ali'
         ]);
     }
 }
