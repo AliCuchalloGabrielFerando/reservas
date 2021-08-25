@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             "usuario"=>"miranda",
             "fechaR"=>"2001-10-05",
             "grupo_id"=>"1",
-            "docente_cod"=>"3"
+            "docente_cod"=>"1"
         ]);
         User::create([
             'name'=>"Martin Andrés Taborga Justiniano",
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             "usuario"=>"martin",
             "fechaR"=>"2002-01-15",
             "grupo_id"=>"1",
-            "docente_cod"=>"4"
+            "docente_cod"=>"2"
         ]);
         User::create([
             'name'=>"Sergio Iván Bueno Ribera",
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder
             "usuario"=>"sergio",
             "fechaR"=>"2003-10-10",
             "grupo_id"=>"3",
-            "auxiliar_cod"=>"5"
+            "auxiliar_cod"=>"1"
         ]);
         User::create([
             'name'=>"Mariana Hurtado Soliz",
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
             "usuario"=>"mariana",
             "fechaR"=>"2003-12-10",
             "grupo_id"=>"3",
-            "auxiliar_cod"=>"6"
+            "auxiliar_cod"=>"2"
         ]);
     }
 }
