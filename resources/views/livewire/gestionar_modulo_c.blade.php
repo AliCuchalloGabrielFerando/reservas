@@ -100,11 +100,11 @@
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium text-black dark:text-white">Número</label>
-                                <input wire:model="numero" type="number" name="numero" id="numero" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                <input wire:model="numero" type="number" name="numero" id="numero" required autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre de Facultad</label>
-                                <input wire:model="facultadNombre" type="text" name="facultadNombre" id="facultadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                <input wire:model="facultadNombre" type="text" name="facultadNombre" id="facultadNombre" required readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                             </div>
                         </div>
                     </div>

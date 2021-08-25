@@ -100,7 +100,7 @@
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="first-name" class="block text-sm font-medium text-black dark:text-white">Usuario</label>
-                                    <input wire:model="usuario" readonly type="text" name="usuario" id="usuario" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="usuario" readonly type="text" name="usuario" id="usuario" required autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Fecha de Registro</label>
@@ -108,19 +108,19 @@
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Alta_Baja</label>
-                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja"  maxlength="6" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="alta_baja" type="text" name="alta_baja" id="alta_baja"  maxlength="6" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Descripción de ubicación</label>
-                                    <input wire:model="descripcion_de_ubicacion" type="text" name="descripcion_de_ubicacion" id="descripcion_de_ubicacion" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="descripcion_de_ubicacion" type="text" name="descripcion_de_ubicacion" id="descripcion_de_ubicacion" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Capacidad</label>
-                                    <input wire:model="capacidad" type="number" name="capacidad" id="capacidad" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="capacidad" type="number" name="capacidad" id="capacidad" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Código de Aula</label>
-                                    <input wire:model="codigo_aula" type="number" name="codigo_aula" id="codigo_aula" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="codigo_aula" type="number" name="codigo_aula" id="codigo_aula" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre de Tipo de Aula</label>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Número de Módulo</label>
-                                    <input wire:model="moduloNumero" type="number" name="moduloNumero" id="moduloNumero" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="moduloNumero" type="number" name="moduloNumero" id="moduloNumero" required readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                             </div>
                         </div>

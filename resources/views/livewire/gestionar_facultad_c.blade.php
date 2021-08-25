@@ -102,20 +102,20 @@
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="first-name" class="block text-sm font-medium text-black dark:text-white">Código</label>
-                                    <input wire:model="codigo" type="number" name="codigo" id="codigo" autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="codigo" type="number" name="codigo" id="codigo" required autocomplete="name" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre</label>
-                                    <input wire:model="nombre" type="string" name="nombre" id="nombre" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="nombre" type="string" name="nombre" id="nombre" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Abreviatura</label>
-                                    <input wire:model="abreviatura" type="string" name="abreviatura" id="abreviatura" autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="abreviatura" type="string" name="abreviatura" id="abreviatura" required autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre de Universidad</label>
-                                    <input wire:model="universidadNombre" type="string" name="universidadNombre" id="universidadNombre" readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
+                                    <input wire:model="universidadNombre" type="string" name="universidadNombre" id="universidadNombre" required readonly autocomplete="user" class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-black">
                                 </div>
                             </div>
                         </div>
