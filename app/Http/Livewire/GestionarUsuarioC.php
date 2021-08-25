@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\auxiliar;
 use App\Models\contador_pagina;
+use App\Models\docente;
 use App\Models\grupo;
 use App\Models\jefe_lab;
 use App\Models\reporte;
@@ -215,25 +217,28 @@ class GestionarUsuarioC extends Component
         $usuarioGuardar->grupo_id = $grupo_id;
 
         $tipo_usuario="";
-        if ($this->docenteCod != '') {
-            $usuarioGuardar->docente_cod = $this->docenteCod;
+        if ($this->docenteCod != "") {
+            $docente = docente::where('persona_ci','=',$this->persona_ci)->first();
+            $usuarioGuardar->docente_cod = $docente->cod;
             $tipo_usuario = "docente";
-            $this->docenteCod = '';
+
         }
-        if ($this->jefeLabCod != '') {
+        if ($this->jefeLabCod != "") {
             $jefe = jefe_lab::where('persona_ci', '=', $this->persona_ci)->first();
             $this->jefeLabCod = $jefe->cod;
             $usuarioGuardar->jefe_lab_cod = $this->jefeLabCod;
             $tipo_usuario = "jefe de laboratorio";
-            $this->jefeLabCod = '';
+
         }
-        if ($this->auxiliarCod != '') {
-            $usuarioGuardar->auxiliar_cod = $this->auxiliarCod;
+        if ($this->auxiliarCod != "") {
+            $auxiliar = auxiliar::where('persona_ci','=',$this->persona_ci)->first();
+            $usuarioGuardar->docente_cod = $auxiliar->cod;
             $tipo_usuario= "auxiliar";
-            $this->auxiliarCod = '';
+
         }
         $usuarioGuardar->email = $this->crearEmail;
         $usuarioGuardar->save();
+
         $reporte = new reporte();
         $reporte->tipo_usuario = "jefe de laboratorio";
         $reporte->user_id = auth()->user()->id;
@@ -244,6 +249,9 @@ class GestionarUsuarioC extends Component
 
         $reporte->save();
 
+        $this->auxiliarCod = '';
+        $this->jefeLabCod = '';
+        $this->docenteCod = '';
         $this->crearEmail = '';
         $this->crearFechaR = '';
         $this->crearNombre = '';

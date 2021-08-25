@@ -67,5 +67,7 @@ class PersonaSeeder extends Seeder
             "apellidoP"=>"Sánchez",
             "nombre"=>"Oscar"
         ]);
+
+
     }
 }
