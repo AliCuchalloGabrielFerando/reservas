@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "fullcalendar": "^5.9.0",
         "laravel-mix": "^6.0.25"
     }
 }
