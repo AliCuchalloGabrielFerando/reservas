@@ -172,9 +172,6 @@
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="email-address" class="block text-sm font-medium text-black dark:text-white">Grupo de
                                         Usuario</label>
-                                    <input wire:model="grupoNombre"
-                                           class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full border border-black"
-                                           type="text" placeholder="Buscar...">
                                     <select
                                         class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full text-black border border-black"
                                         name="grupo_id" id="grupo_id" required
