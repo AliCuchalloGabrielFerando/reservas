@@ -55,7 +55,7 @@ class Pdfs extends Component
                $this->bandera = false;
            }
         }
-        return view('livewire.reporte.pdfs');
+        return view('livewire.pdfs');
 
     }
     public function descargar(){
