@@ -6,11 +6,6 @@
         <x-input wire:model="semana"  name="semana" id="semana" type="week"></x-input>
     </div>
     </div>
-{{--    <div class="flex justify-center p-5">
-        @if($semana!=null)
-        <x-button wire:click="mostrar">Mostrar calendario</x-button>
-        @endif
-    </div>--}}
 
 
    <div class="grid grid-cols-7 gap-0 justify-items-center  font-semibold">
@@ -23,51 +18,59 @@
         <div class="border border-black bg-yellow-800 text-center text-white font-semibold uppercase w-full">Domingo</div>
    </div>
 
-       <div class="grid grid-cols-7  grid-flow-row auto-rows-max gap-0 justify-items-center  font-semibold">
-
+       <div class="grid grid-cols-7 grid-flow-row auto-rows-max gap-0 justify-items-center  font-semibold" style="grid-template-rows: repeat(200, minmax(0, 1fr));">
        @foreach($horario_reservas as $reserva)
 
+
            @foreach($reserva as $r)
-               @if($r['date']=='lunes')
-                   <x-horario class="col-start-1 row-span-{{$r['span']}} row-start-{{$r['start']}}">
-                       <p class="text-xl">{{$r['data']->actividad}}</p>
-                       <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
-                   </x-horario>
-               @endif
-                   @if($r['date']=='martes')
-                       <x-horario class="col-start-2 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+
+                   @if($r['date']=='lunes')
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-1">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
+                       </x-horario>
+                   @endif
+                   @if($r['date']=='martes')
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-2 ">
+                           <p class="text-xl">{{$r['data']->actividad}}</p>
+                           <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
                    @if($r['date']=='miércoles')
-                       <x-horario class="col-start-3 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-3 ">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
                    @if($r['date']=='jueves')
-                       <x-horario class="col-start-4 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-4 ">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
                    @if($r['date']=='viernes')
-                       <x-horario class="col-start-5 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-5 ">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
                    @if($r['date']=='sábado')
-                       <x-horario class="col-start-6 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+                       <x-horario class=" row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-6">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
                    @if($r['date']=='domingo')
-                       <x-horario class="col-start-7 row-span-{{$r['span']}} row-start-{{$r['start']}}">
+                       <x-horario class="row-span-{{$r['span']}} row-start-{{$r['start']}} col-start-7">
                            <p class="text-xl">{{$r['data']->actividad}}</p>
                            <p >{{$r['data']->hora_inicio.' - '.$r['data']->hora_fin}}</p>
+                           <p >{{$r['data']->nombre}}</p>
                        </x-horario>
                    @endif
            @endforeach

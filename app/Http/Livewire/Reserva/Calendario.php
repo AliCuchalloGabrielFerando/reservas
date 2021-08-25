@@ -53,8 +53,9 @@ class Calendario extends Component
 
         $reservas = collect([]);
         foreach ($this->dates as $date) {
-            $data = reserva_aula::select('reserva_aula.*','reserva.actividad')
+            $data = reserva_aula::select('reserva_aula.*','reserva.actividad','nombre')
                 ->join('reserva', 'reserva_id', '=', 'reserva.id')
+                ->join('estado', 'estado_id', '=', 'estado.id')
                 ->whereJsonContains('dias', $date)
                 ->where('aula_id',$this->aula_actual->id)
                 ->orderBy('hora_inicio')
@@ -90,7 +91,7 @@ class Calendario extends Component
                         $df=Carbon::parse('07:00:00')->diffInMinutes($inicio,true);
                         $start=$df/15;
                         //dd($filas);
-                        $col->push(['start'=>$start+2,'span'=>$span,'date' => (new Carbon($reserva['date']))->dayName, 'data' => $reserva_tiempo]);
+                        $col->push(['start'=>$start+1,'span'=>$span,'date' => (new Carbon($reserva['date']))->dayName, 'data' => $reserva_tiempo]);
                             break;
                        // }
                     }
@@ -101,7 +102,7 @@ class Calendario extends Component
             $this->horario_reservas->push($col);
         }
 
-
+        //$this->horario_reservas=$this->horario_reservas->reverse();
        // dd($this->horario_reservas);
 
     }
