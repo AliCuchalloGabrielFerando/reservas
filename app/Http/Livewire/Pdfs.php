@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\contador_pagina;
 use App\Models\reporte;
 use Barryvdh\DomPDF\PDF;
 use Dompdf\Adapter\PDFLib;
@@ -22,9 +23,23 @@ class Pdfs extends Component
 
     public $bandera;
 
+    public $contador_pagina_reporte_vista;
+
     protected $listeners = ['habilitar'=>'verificar'];
     public  function verificar(){
 
+    }
+    public function mount(){
+        $this->contador_pagina_reporte_vista = contador_pagina::where('nombre','=','reporte_vista')->first();
+        if(!isset($this->contador_pagina_reporte_vista)){
+            $this->contador_pagina_reporte_vista =  contador_pagina::create([
+                "nombre"=>"reporte_vista",
+                "visitas"=>1
+            ]);
+        }else{
+            $this->contador_pagina_reporte_vista->visitas++;
+            $this->contador_pagina_reporte_vista->save();
+        }
     }
 
     public function render()
