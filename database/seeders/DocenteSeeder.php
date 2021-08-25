@@ -25,5 +25,9 @@ class DocenteSeeder extends Seeder
             "cod"=>"3",
             "persona_ci"=>"3152001"
         ]);
+        docente::create([
+            "cod"=>"4",
+            "persona_ci"=>"63025145"
+        ]);
     }
 }

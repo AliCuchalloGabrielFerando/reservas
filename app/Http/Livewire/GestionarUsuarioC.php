@@ -77,7 +77,7 @@ class GestionarUsuarioC extends Component
     }
     public function render()
     {
-        return view('livewire.usuario.gestionar_usuario_c',
+        return view('livewire.gestionar_usuario_c',
             ['usuarios' => User::where('name', 'like', "%{$this->search}%")
                 ->orwhere('usuario', 'like', "%{$this->search}%")
                 ->paginate($this->nrosPagina),

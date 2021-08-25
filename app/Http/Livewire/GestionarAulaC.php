@@ -68,7 +68,7 @@ class GestionarAulaC extends Component
     public function render()
     {
         $this->tipos_aulas = tipo_aula::all();
-        return view('livewire.facultad.gestionar_aula_c',
+        return view('livewire.gestionar_aula_c',
             ['aulas'=>aula::where('codigo_aula','like',"%{$this->search}%")
                 ->where('modulo_id','=',$this->moduloId)
                 ->paginate($this->nrosPagina)]);

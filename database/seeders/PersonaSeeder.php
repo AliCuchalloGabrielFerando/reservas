@@ -67,6 +67,24 @@ class PersonaSeeder extends Seeder
             "apellidoP"=>"Sánchez",
             "nombre"=>"Oscar"
         ]);
+        persona::create([
+            "ci"=>"63025145",
+            "apellidoM"=>"Viruez",
+            "apellidoP"=>"Barroso",
+            "nombre"=>"Gino"
+        ]);
+        persona::create([
+            "ci"=>"8050214",
+            "apellidoM"=>"Lora",
+            "apellidoP"=>"Rojas",
+            "nombre"=>"Fernando"
+        ]);
+        persona::create([
+            "ci"=>"4456321",
+            "apellidoM"=>"Diaz",
+            "apellidoP"=>"Peréz",
+            "nombre"=>"Gary"
+        ]);
 
 
     }

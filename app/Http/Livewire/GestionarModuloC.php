@@ -64,7 +64,7 @@ class GestionarModuloC extends Component
 
     public function render()
     {
-        return view('livewire.facultad.gestionar_modulo_c',
+        return view('livewire.gestionar_modulo_c',
             ['modulos'=>modulo::where('nro','like',"%{$this->search}%")
                 ->where('facultad_id','=',$this->facuID)
                 ->paginate($this->nrosPagina)]);

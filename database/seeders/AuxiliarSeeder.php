@@ -61,5 +61,21 @@ class AuxiliarSeeder extends Seeder
             "persona_ci"=>"1020304",
             "tipo_auxiliar_id"=>"1"
         ]);
+        auxiliar::create([
+            "cod"=>"4",
+            "alta_baja"=>"true",
+            "ciudad"=>"Oruro",
+            "correo"=>"gary@gmail.com",
+            "usuario"=>"gary",
+            "fechaR"=>"2021-07-22",
+            "fecha_nacimiento"=>"1997-02-22",
+            "codigo_aux"=>"20",
+            "registro"=>"215033952",
+            "telefono"=>"76055368",
+            "numero_formulario"=>"40",
+            "cv"=>"100101010",
+            "persona_ci"=>"4456321",
+            "tipo_auxiliar_id"=>"1"
+        ]);
     }
 }
