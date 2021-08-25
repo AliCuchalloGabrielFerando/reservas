@@ -43,7 +43,7 @@ DB_PASSWORD=c9e4208e6e1976e92e45bd5a711fea2ffa23c426a847fa198ef482aaf6866d18*/
 
 
 Route::get('/', function () {
-    return redirect(\route('login'));
+    return redirect(\route('gestionar_usuario_c'));
 })->name('w');
 
 
