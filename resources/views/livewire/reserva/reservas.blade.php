@@ -8,7 +8,6 @@
             <span>
                 Laboratorio {{$reserva->codigo_aula}}
             </span>
-
             <span>
               {{$reserva->actividad}}
             </span>
@@ -23,6 +22,4 @@
             @endif
         </x-a>
     @endforeach
-
-
 </div>

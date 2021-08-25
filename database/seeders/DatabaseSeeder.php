@@ -33,8 +33,6 @@ class DatabaseSeeder extends Seeder
             AulaSeeder::class,
             EstadoSeeder::class,
             PrioridadSeeder::class,
-            ReservaSeeder::class,
-            ReservaAulaSeeder::class
         ]);
     }
 }

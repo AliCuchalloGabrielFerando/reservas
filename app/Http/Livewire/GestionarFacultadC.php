@@ -62,7 +62,7 @@ class GestionarFacultadC extends Component
 
     public function render()
     {
-        return view('livewire.gestionar_facultad_c',
+        return view('livewire.facultad.gestionar_facultad_c',
             ['facultades'=>facultad::where('codigo','like',"%{$this->search}%")
                 ->paginate($this->nrosPagina)]);
     }

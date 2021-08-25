@@ -35,7 +35,6 @@
                     <x-nav-link class="text-white dark:text-black" href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Gestionar Reserva') }}
                     </x-nav-link>
-
                     @endauth
                     <button class="text-white dark:text-black" id="switchTheme">
                         {{ __('Tema') }}

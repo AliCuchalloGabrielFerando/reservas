@@ -76,7 +76,6 @@ Route::middleware(['auth','role:Jefe Laboratorio'])->group(function (){
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 /*Route::get('/repo',function (){
     $pdf = App::make('dompdf.wrapper');
     $pdf->loadView('reportenuevo');
@@ -89,7 +88,6 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
         'users' => user::all() ]);
     return $pdf->stream();
 })->name('ver');*/
-
 
 Route::get('/login',function(){
     return view('auth.login');

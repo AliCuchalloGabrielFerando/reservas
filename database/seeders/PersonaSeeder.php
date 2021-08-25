@@ -19,7 +19,6 @@ class PersonaSeeder extends Seeder
             "apellidoP"=>"Ali",
             "nombre"=>"Gabriel"
         ]);
-
         persona::create([
             "ci"=>"9610222",
             "apellidoM"=>"Justiniano",
@@ -49,6 +48,24 @@ class PersonaSeeder extends Seeder
             "apellidoM"=>"Vásquez",
             "apellidoP"=>"Miranda",
             "nombre"=>"Jose"
+        ]);
+        persona::create([
+            "ci"=>"3152001",
+            "apellidoM"=>"Veizaga",
+            "apellidoP"=>"Balcazar",
+            "nombre"=>"Evans"
+        ]);
+        persona::create([
+            "ci"=>"1020304",
+            "apellidoM"=>"Mamani",
+            "apellidoP"=>"Aguilar",
+            "nombre"=>"Daniel"
+        ]);
+        persona::create([
+            "ci"=>"5030211",
+            "apellidoM"=>"Pedraza",
+            "apellidoP"=>"Sánchez",
+            "nombre"=>"Oscar"
         ]);
     }
 }

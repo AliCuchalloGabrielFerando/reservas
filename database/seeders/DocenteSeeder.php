@@ -14,12 +14,16 @@ class DocenteSeeder extends Seeder
     public function run()
     {
         docente::create([
-            "cod"=>"3",
+            "cod"=>"1",
             "persona_ci"=>"8020406"
         ]);
         docente::create([
-            "cod"=>"4",
+            "cod"=>"2",
             "persona_ci"=>"7321546"
+        ]);
+        docente::create([
+            "cod"=>"3",
+            "persona_ci"=>"3152001"
         ]);
     }
 }

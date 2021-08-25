@@ -1,7 +1,7 @@
 <div>
     <h2 class="text-2xl font-semibold m-5 text-black dark:text-white">Formulario de solicitud de reserva</h2>
     <div class="flex flex flex-grow justify-end content-start ml-8 mr-5">
-        <p class="text-sm text-gray-500"> Las visitas a esta página
+        <p class="text-sm text-black dark:text-white"> Las visitas a esta página
             son: {{$contador_pagina_reserva_crear->visitas}}</p>
     </div>
     <form class="grid grid-cols-5 gap-4 p-5" wire:submit.prevent="reservar">
@@ -106,8 +106,6 @@
             </div>
         @endforeach
     </div>
-
-
     <x-dialog-modal wire:model="modal" wire:click="$toggle('modal')">
         <x-slot name="title">
             Agregar días
@@ -167,7 +165,6 @@
             </form>
         </x-slot>
         <x-slot name="footer">
-
         </x-slot>
     </x-dialog-modal>
 </div>

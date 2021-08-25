@@ -14,7 +14,7 @@ class AuxiliarSeeder extends Seeder
     public function run()
     {
         auxiliar::create([
-            "cod"=>"5",
+            "cod"=>"1",
             "alta_baja"=>"true",
             "ciudad"=>"Santa Cruz de la Sierra",
             "correo"=>"sergio@gmail.com",
@@ -30,7 +30,7 @@ class AuxiliarSeeder extends Seeder
             "tipo_auxiliar_id"=>"1"
         ]);
         auxiliar::create([
-            "cod"=>"6",
+            "cod"=>"2",
             "alta_baja"=>"true",
             "ciudad"=>"Santa Cruz de la Sierra",
             "correo"=>"mariana@gmail.com",
@@ -43,6 +43,22 @@ class AuxiliarSeeder extends Seeder
             "numero_formulario"=>"20",
             "cv"=>"100101010",
             "persona_ci"=>"8911254",
+            "tipo_auxiliar_id"=>"1"
+        ]);
+        auxiliar::create([
+            "cod"=>"3",
+            "alta_baja"=>"true",
+            "ciudad"=>"La Paz",
+            "correo"=>"daniel@gmail.com",
+            "usuario"=>"daniel",
+            "fechaR"=>"2021-07-22",
+            "fecha_nacimiento"=>"1997-02-22",
+            "codigo_aux"=>"15",
+            "registro"=>"213055268",
+            "telefono"=>"68042135",
+            "numero_formulario"=>"30",
+            "cv"=>"100101010",
+            "persona_ci"=>"1020304",
             "tipo_auxiliar_id"=>"1"
         ]);
     }

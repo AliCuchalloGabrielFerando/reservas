@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
-use function Sodium\increment;
-
 
 class GestionarUsuarioC extends Component
 {
@@ -52,7 +50,7 @@ class GestionarUsuarioC extends Component
     public function mount(){
         $this->contador_pagina_usuario_crear = contador_pagina::where('nombre','=','usuario_crear')->first();
         $this->contador_pagina_usuario_vista = contador_pagina::where('nombre','=','usuario_vista')->first();
-        $this->contador_pagina_usuario_editar = contador_pagina::where('nombre','=','usuario_editas')->first();
+        $this->contador_pagina_usuario_editar = contador_pagina::where('nombre','=','usuario_editar')->first();
         if(!isset($this->contador_pagina_usuario_crear)){
             $this->contador_pagina_usuario_crear = contador_pagina::create([
                 "nombre"=>"usuario_crear",
@@ -77,7 +75,7 @@ class GestionarUsuarioC extends Component
     }
     public function render()
     {
-        return view('livewire.gestionar_usuario_c',
+        return view('livewire.usuario.gestionar_usuario_c',
             ['usuarios' => User::where('name', 'like', "%{$this->search}%")
                 ->orwhere('usuario', 'like', "%{$this->search}%")
                 ->paginate($this->nrosPagina),
@@ -109,10 +107,6 @@ class GestionarUsuarioC extends Component
     {
         $this->resetPage();
     }
-
-    /*public function idActual($elId){
-        $this->idActual = $elId;
-    }*/
 
     public function clear()
     {
@@ -148,7 +142,7 @@ class GestionarUsuarioC extends Component
         $reporte->tipo_usuario = "jefe de laboratorio";
         $reporte->user_id = auth()->user()->id;
         $reporte->usuario = auth()->user()->usuario;
-        $reporte->operacion = "se elimino la cuenta " . $usuarioEliminado->name . " con usuario: "
+        $reporte->operacion = "se eliminó la cuenta " . $usuarioEliminado->name . " con usuario: "
             . $usuarioEliminado->usuario . " de tipo: " . $tipo_usuarioEditado;
         $reporte->fecha = Carbon::now();
 
@@ -188,7 +182,7 @@ class GestionarUsuarioC extends Component
         $reporte->tipo_usuario = "jefe de laboratorio";
         $reporte->user_id = auth()->user()->id;
         $reporte->usuario = auth()->user()->usuario;
-        $reporte->operacion = "se edito el usuario " . $usuarioEditado->name . " con usuario: "
+        $reporte->operacion = "Se editó el usuario " . $usuarioEditado->name . " con usuario: "
             . $usuarioEditado->usuario . " de tipo: " . $tipo_usuarioEditado;
         $reporte->fecha = Carbon::now();
         $reporte->save();
@@ -244,13 +238,11 @@ class GestionarUsuarioC extends Component
         $reporte->tipo_usuario = "jefe de laboratorio";
         $reporte->user_id = auth()->user()->id;
         $reporte->usuario = auth()->user()->usuario;
-        $reporte->operacion = "se creo el usuario " . $this->crearNombre . " con usuario: "
+        $reporte->operacion = "Se creó el usuario " . $this->crearNombre . " con usuario: "
             . $this->crearUsuario . " de tipo: " . $tipo_usuario;
         $reporte->fecha = Carbon::now();
+
         $reporte->save();
-
-
-
 
         $this->crearEmail = '';
         $this->crearFechaR = '';
@@ -258,34 +250,28 @@ class GestionarUsuarioC extends Component
         $this->crearPass = '';
         $this->crearUsuario = '';
 
-
         $this->otraPagina = "actual";
 
     }
-
     public function requerido($grupo_id)
     {
         $this->grupoId = $grupo_id;
-
     }
 
     public function requeridoJefe($persona_ci)
     {
-        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
         $this->persona_ci = $persona_ci;
         $this->jefeLabCod = 'entrar';
     }
 
     public function requeridoAuxiliar($persona_ci)
     {
-        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
         $this->persona_ci = $persona_ci;
         $this->auxiliarCod = 'entrar';
     }
 
     public function requeridoDocente($persona_ci)
     {
-        //  $jefe = jefe_lab::where('persona_ci','=',$persona_ci)->first();
         $this->persona_ci = $persona_ci;
         $this->docenteCod = 'entrar';
     }

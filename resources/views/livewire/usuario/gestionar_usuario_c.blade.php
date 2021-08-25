@@ -57,24 +57,24 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="ml-4">
-                                                    <div class="text-sm text-gray-500">
+                                                    <div class="text-sm text-black">
                                                         {{$usuario->name}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-black">
                                                 {{$usuario->fechaR}}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-black">
                                                 {{$usuario->usuario}}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">
+                                            <div class="text-sm text-black">
                                                 @if($usuario->docente_cod)
                                                     Docente
                                                 @endif

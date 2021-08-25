@@ -25,5 +25,11 @@ class JefeLabSeeder extends Seeder
             "telefono"=>"76615445",
             "persona_ci"=>"9610222"
         ]);
+        jefe_lab::create([
+            "cod"=>"3",
+            "correo"=>"oscar@gmail.com",
+            "telefono"=>"72054123",
+            "persona_ci"=>"5030211"
+        ]);
     }
 }
