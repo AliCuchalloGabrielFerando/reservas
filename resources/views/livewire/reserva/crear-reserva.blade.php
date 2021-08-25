@@ -1,5 +1,5 @@
 <div>
-    <h2 class="text-2xl font-semibold m-5">Formulario de solicitud de reserva</h2>
+    <h2 class="text-2xl font-semibold m-5 text-black dark:text-white">Formulario de solicitud de reserva</h2>
     <div class="flex flex flex-grow justify-end content-start ml-8 mr-5">
         <p class="text-sm text-gray-500"> Las visitas a esta página
             son: {{$contador_pagina_reserva_crear->visitas}}</p>

@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use App\Models\contador_pagina;
 use App\Models\facultad;
 use App\Models\modulo;
+use App\Models\reporte;
 use Carbon\Carbon;
 use Livewire\WithPagination;
 use Livewire\Component;
+
 
 class GestionarModuloC extends Component
 {
@@ -85,7 +87,7 @@ class GestionarModuloC extends Component
     public function crearModulo(){
         $moduloCrear = new modulo();
         $moduloCrear->nro = $this->numero;
-        $moduloCrear->facultad_id = $this->facultadId;
+        $moduloCrear->facultad_id = $this->facuID;
         $moduloCrear->save();
 
         $reporte = new reporte();

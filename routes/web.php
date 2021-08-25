@@ -54,7 +54,7 @@ Route::middleware(['auth', 'role:all'])->group(function () {
     //Route::get('/reserva/editar/{id}',\App\Http\Livewire\Reserva\EditarReserva::class)->name('reserva.editar');
 });
 
-Route::middleware(['auth','role:jefe laboratorio'])->group(function (){
+Route::middleware(['auth','role:Jefe Laboratorio'])->group(function (){
     Route::get('/reporte',\App\Http\Livewire\Pdfs::class)->name('reporte');
 
     Route::get('/gestionar_modulo_c/{id}',\App\Http\Livewire\GestionarModuloC::class)

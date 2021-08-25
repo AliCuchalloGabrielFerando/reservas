@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class UserSeeder extends Seeder
 {
     /**
@@ -51,7 +52,7 @@ class UserSeeder extends Seeder
             "usuario"=>"martin",
             "fechaR"=>"2002-01-15",
             "grupo_id"=>"1",
-            "jefe_lab_cod"=>"4"
+            "docente_cod"=>"4"
         ]);
         User::create([
             'name'=>"Sergio Iván Bueno Ribera",
@@ -69,7 +70,7 @@ class UserSeeder extends Seeder
             'password'=>Hash::make("password"),
             "alta_baja"=>"true",
             "usuario"=>"mariana",
-            "fechaR"=>"203-12-10",
+            "fechaR"=>"2003-12-10",
             "grupo_id"=>"3",
             "auxiliar_cod"=>"6"
         ]);
