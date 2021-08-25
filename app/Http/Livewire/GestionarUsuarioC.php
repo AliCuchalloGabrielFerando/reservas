@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\contador_pagina;
 use App\Models\grupo;
 use App\Models\jefe_lab;
-use App\Models\persona;
 use App\Models\reporte;
 use App\Models\User;
 use Carbon\Carbon;

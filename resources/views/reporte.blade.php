@@ -31,7 +31,7 @@ width: 700px;
             <tr>
                 <th style="text-align: center; background-color: #55608f;">Usuario</th>
                 <th style="text-align: center;background-color: #55608f;">Tipo de Usuario</th>
-                <th style="text-align: center; background-color: #55608f;">Operacion</th>
+                <th style="text-align: center; background-color: #55608f;">Operación</th>
                 <th style="text-align: center; background-color: #55608f;">Fecha</th>
             </tr>
             </thead>
@@ -48,7 +48,7 @@ width: 700px;
                 </tbody>
             @endforeach
         </table>
-        <p>reporte total: {{$total}}</p>
+        <p>Reporte Total: {{$total}}</p>
     </div>
 </div>
 

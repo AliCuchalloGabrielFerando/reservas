@@ -9,6 +9,7 @@ use App\Models\tipo_aula;
 use Carbon\Carbon;
 use Livewire\WithPagination;
 use Livewire\Component;
+use App\Models\reporte;
 
 class GestionarAulaC extends Component
 {

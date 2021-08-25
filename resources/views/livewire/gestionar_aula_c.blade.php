@@ -44,7 +44,7 @@
                                         Eliminar
                                     </button>
                                     <a href="{{route('reserva.calendario',['id'=>$aula->id])}}" type="button" class="text-white dark:text-black inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Ver Aulas
+                                        Ver Calendario
                                     </a>
                                     <div
                                         x-show="open"
@@ -79,7 +79,7 @@
         </div>
         <div class="flex justify-end">
             <div class="flex flex flex-grow justify-start content-start ml-8">
-                <p class="text-sm text-black dark:text-white"> las visitas a esta pagina
+                <p class="text-sm text-black dark:text-white"> Las visitas a esta página
                     son: {{$contador_pagina_aula_vista->visitas}}</p>
             </div>
             <button wire:click="crear" type="button"
@@ -125,7 +125,7 @@
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="last-name" class="block text-sm font-medium text-black dark:text-white">Nombre de Tipo de Aula</label>
                                     <select
-                                        class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full "
+                                        class="form-input rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-3 shadow-sm mt-1 block w-full border border-black"
                                         wire:model="tipo_id"  name="tipo_id" id="tipo_id" required>
                                         <option value="" selected>Elija el tipo de aula </option>
                                         @foreach($tipos_aulas as $tip)

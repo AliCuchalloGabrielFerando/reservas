@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\contador_pagina;
 use App\Models\facultad;
-use App\Models\modulo;
+use App\Models\reporte;
 use App\Models\universidad;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
