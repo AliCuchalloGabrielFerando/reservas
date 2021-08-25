@@ -6,6 +6,7 @@ use App\Models\aula;
 use App\Models\contador_pagina;
 use App\Models\modulo;
 use App\Models\tipo_aula;
+use Carbon\Carbon;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -93,11 +94,32 @@ class GestionarAulaC extends Component
         $aulaCrear->tipo_aula_id =$this->tipo_id;
         $aulaCrear->descripcion_de_ubicacion = $this->descripcion_de_ubicacion;
         $aulaCrear->save();
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se creo el aula" . $aulaCrear->codigo_aula .
+            " perteneciente al modulo: "
+            . $aulaCrear->modulo->nro;
+        $reporte->fecha = Carbon::now();
+
+        $reporte->save();
         $this->otraPagina = "actual";
     }
 
     public function eliminarAula($id){
         $aulaEliminada = aula::find($id);
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se elimino el aula " . $aulaEliminada->codigo_aula .
+            " perteneciente al modulo: "
+            . $aulaEliminada->modulo->nro;
+        $reporte->fecha = Carbon::now();
+
+        $reporte->save();
         $aulaEliminada-> delete();
     }
 
