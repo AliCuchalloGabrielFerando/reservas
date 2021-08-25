@@ -54,11 +54,16 @@ class CrearReserva extends Component
 
     public $crear;
     public $mensaje;
-
+    public $estadoMostrar;
     public $contador_pagina_reserva_crear;
 
     public function mount($id = null)
     {
+        if ( isset(auth()->user()->jefe_lab_cod)  ){
+            $this->estadoMostrar="required";
+        }else{
+            $this->estadoMostrar="disabled";
+        }
         $this->contador_pagina_reserva_crear = contador_pagina::where('nombre', '=', 'reserva_crear')->first();
         if (!isset($this->contador_pagina_reserva_crear)) {
             $this->contador_pagina_reserva_crear = contador_pagina::create([

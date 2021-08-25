@@ -8,7 +8,7 @@
 
         <div class="col-span-2">
             <x-label for="beneficiario">Beneficiario</x-label>
-            <x-selector wire:model="persona" name="beneficiario" id="beneficiario" type="text" required>
+            <x-selector wire:model="beneficiario" name="beneficiario" id="beneficiario" type="text" required>
                 @foreach($personas as $per)
                     <option value="{{$per->ci}}">{{$per->nombre}}</option>
                 @endforeach
@@ -27,11 +27,12 @@
         {{-- @if(!$crear)--}}
         <div>
             <x-label for="estado">Estado</x-label>
-            <x-selector wire:model="estado" name="estado" id="estado" required>
+            <select class="mt-1 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400 p-2 block w-full shadow-sm sm:text-sm border border-gray-300"
+                    wire:model="estado" name="estado" id="estado" {{$estadoMostrar}}>
                 @foreach($estados as $est)
                     <option value="{{$est->id}}">{{$est->nombre}}</option>
                 @endforeach
-            </x-selector>
+            </select>
         </div>
         {{--@endif--}}
 
