@@ -49,7 +49,7 @@ class CreateReservaTable extends Migration
                 ->cascadeOnUpdate();
 
             $table->unsignedBigInteger("jefe_lab_cod") ->nullable();
-            $table->foreign("jefe_lab_cod")->references("cod")->on("jefe_lab")
+            $table->foreign("jefe_lab_cod")->references("id")->on("users")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

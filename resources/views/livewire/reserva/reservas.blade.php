@@ -4,6 +4,7 @@
     {{'Reservar'}}</x-a>
 </div>
     @foreach($reservas as $reserva)
+        @if( isset(auth()->user()->jefe_lab_cod))
         <x-a href="{{route('reserva.crear',['id'=>$reserva->id])}}" class="flex flex-col space-y-3 w-48">
             <span>
                 Laboratorio {{$reserva->codigo_aula}}
