@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\contador_pagina;
 use App\Models\facultad;
 use App\Models\modulo;
+use Carbon\Carbon;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -86,11 +87,34 @@ class GestionarModuloC extends Component
         $moduloCrear->nro = $this->numero;
         $moduloCrear->facultad_id = $this->facultadId;
         $moduloCrear->save();
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se creo el modulo " . $moduloCrear->nro .
+            " perteneciente a la facultad: "
+            . $moduloCrear->facultad->nombre;
+        $reporte->fecha = Carbon::now();
+        $reporte->save();
+
         $this->otraPagina = "actual";
     }
 
     public function eliminarMod($id){
         $moduloEliminado = modulo::find($id);
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se elimino el modulo " . $moduloEliminado->nro .
+            " perteneciente a la facultad: "
+            . $moduloEliminado->facultad->nombre;
+        $reporte->fecha = Carbon::now();
+
+        $reporte->save();
+
         $moduloEliminado-> delete();
     }
 

@@ -6,6 +6,7 @@ use App\Models\contador_pagina;
 use App\Models\facultad;
 use App\Models\modulo;
 use App\Models\universidad;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -86,11 +87,35 @@ class GestionarFacultadC extends Component
         $facultadCrear->abreviatura = $this->abreviatura;
         $facultadCrear->universidad_id = $this->universidad->id;
         $facultadCrear->save();
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se creo la facultad " . $facultadCrear->nombre . " con abreviatura: "
+            . $facultadCrear->abreviatura . " perteneciente a la univervidad: "
+            . $facultadCrear->universidad->nombre;
+        $reporte->fecha = Carbon::now();
+        $reporte->save();
+
+
         $this->otraPagina = "actual";
     }
 
     public function eliminarFac($id){
         $facultadEliminado = facultad::find($id);
+
+
+        $reporte = new reporte();
+        $reporte->tipo_usuario = "jefe de laboratorio";
+        $reporte->user_id = auth()->user()->id;
+        $reporte->usuario = auth()->user()->usuario;
+        $reporte->operacion = "se elimino la facultad " . $facultadEliminado->nombre . " con abreviatura: "
+            . $facultadEliminado->abreviatura . " perteneciente a la univervidad: "
+            . $facultadEliminado->universidad->nombre;
+        $reporte->fecha = Carbon::now();
+
+        $reporte->save();
         $facultadEliminado->delete();
     }
 
