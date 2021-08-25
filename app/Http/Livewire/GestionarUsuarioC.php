@@ -95,7 +95,7 @@ class GestionarUsuarioC extends Component
                     ->get(),
                 'auxiliares' => DB::table('persona')
                     ->rightJoin('auxiliar', 'ci', '=', 'persona_ci')
-                    ->leftjoin('users', 'cod', '!=', 'auxiliar_cod')
+                    ->leftjoin('users', 'cod', '=', 'auxiliar_cod')
                     ->whereNull('auxiliar_cod')
                   //  ->where('nombre', 'like', "%{$this->auxiliarNombre}%")
                     ->get(),
